@@ -1,0 +1,39 @@
+{
+  "name": "@uiw/react-native-amap-geolocation",
+  "title": "React Native Amap Geolocation",
+  "version": "1.0.0",
+  "description": "React Native 高德地图定位模块，支持 Android/iOS",
+  "main": "index.js",
+  "files": [
+    "README.md",
+    "android",
+    "index.js",
+    "ios"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uiwjs/@uiw/react-native-amap-geolocation.git",
+    "baseUrl": "https://github.com/uiwjs/@uiw/react-native-amap-geolocation"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "Kenny Wong",
+    "email": "wowohoo@qq.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.60.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.5"
+  }
+}
