@@ -1,0 +1,12 @@
+{
+  "inputFiles": "./index.d.ts",
+  "out": "typedoc",
+  "entryPoint": "AMapGeolocation",
+  "name": "React Native Amap Geolocation",
+  "mode": "file",
+  "includeDeclarations": true,
+  "excludeExternals": true,
+  "ignoreCompilerErrors": true,
+  "excludePrivate": true,
+  "excludeProtected": true
+}

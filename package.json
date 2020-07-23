@@ -11,7 +11,7 @@
     "ios"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "typedoc"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,8 @@
   },
   "devDependencies": {
     "react": "^16.9.0",
-    "react-native": "^0.61.5"
+    "react-native": "^0.61.5",
+    "typedoc": "^0.17.8",
+    "typescript": "^3.9.7"
   }
 }
