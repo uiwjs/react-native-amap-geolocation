@@ -1,17 +1,97 @@
-# @uiw/react-native-amap-geolocation
+@uiw/react-native-amap-geolocation
+----
 
-## Getting started
+[![NPM Version](https://img.shields.io/npm/v/@uiw/react-native-amap-geolocation.svg)](https://npmjs.org/package/@uiw/react-native-amap-geolocation)
 
-`$ npm install @uiw/react-native-amap-geolocation --save`
+React Native 高德地图定位模块，支持 Android/iOS
 
-### Mostly automatic installation
+## 注意事项
 
-`$ react-native link @uiw/react-native-amap-geolocation`
+<details>
+<summary>iOS：获取逆地理信息需要高德地图配置 apiKey</summary>
+
+<img src="./imgs/amapkey.png" />
+
+</details>
+
+<details>
+<summary>iOS：高德地图包需要 WiFi 权限</summary>
+
+iOS 端高德地图包需要 WiFi 权限，否则报如下警告：
+
+```
+nehelper sent invalid result code [1] for Wi-Fi information request
+```
+
+<img src="./imgs/xcode.png" />
+
+</details>
+
+<details>
+<summary>iOS：需要保证"Background Modes"中的"Location updates"处于选中状态</summary>
+
+<img src="./imgs/xcode.png" />
+
+</details>
+
+## 安装依赖
+
+```bash
+yarn add @uiw/react-native-amap-geolocation
+# react-native version >= 0.60+
+$ cd ios && pod install
+```
 
 ## Usage
-```javascript
-import RNAMapGeolocation from '@uiw/react-native-amap-geolocation';
 
-// TODO: What to do with the module?
-RNAMapGeolocation;
+```javascript
+import AMapGeolocation from '@uiw/react-native-amap-geolocation';
+
+// 设置 高德地图 apiKey
+AMapGeolocation.setApiKey(apiKey);
+// 指定所需的精度级别
+AMapGeolocation.setDesiredAccuracy(3);
+// 连续定位是否返回逆地理信息
+AMapGeolocation.setLocatingWithReGeocode(true);
+
+async function getCurrentLocation(){
+  try {
+    const json = await AMapGeolocation.getCurrentLocation();
+    console.log('json:', json);
+  } catch (error) {
+    console.log('error:', error);
+  }
+}
 ```
+
+## 错误处理
+
+```bash
+[NetworkInfo] Signal strength query returned error: Error Domain=NSPOSIXErrorDomain Code=13 "Permission denied", descriptor: <CTServiceDescriptor 0x283317100, domain=1, instance=1>
+```
+
+在 `Product` -> `Scheme` -> `Edit Scheme` -> `Run` -> `Arguments` -> `Environment Variables` 添加 `OS_ACTIVITY_MODE` `disable`
+
+```bash
+nehelper sent invalid result code [1] for Wi-Fi information request
+```
+
+配置 WiFi 权限
+
+## iOS 配置后台定位
+
+1. 左侧目录中选中工程名，开启 `TARGETS` -> `Capabilities` -> `Background Modes`
+2. 在 `Background Modes` 中勾选 `Location updates`
+
+## 其它
+
+当前工程基于 [@brodybits/create-react-native-module](https://github.com/brodybits/create-react-native-module) 初始化。
+
+```bash
+npx create-react-native-module --package-identifier com.uiwjs --object-class-name RNAMapGeolocation --generate-example AMapGeolocation --example-react-native-version 0.63.0 --module-name @uiw/react-native-amap-geolocation --github-account uiwjs --author-name "Kenny Wong" --author-email "wowohoo@qq.com"
+```
+
+## 相关连接 
+
+- [高德地图：iOS定位SDK V2.6.5](https://lbs.amap.com/api/ios-location-sdk/download/)
+- [高德地图：提交 AppStore 必读](https://lbs.amap.com/api/ios-location-sdk/guide/create-project/idfa-guide)
