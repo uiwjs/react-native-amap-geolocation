@@ -45,7 +45,17 @@ $ cd ios && pod install
 ## Usage
 
 ```javascript
+import { Platform } from 'react-native';
 import AMapGeolocation from '@uiw/react-native-amap-geolocation';
+
+let apiKey = '';
+
+if (Platform.OS === 'ios') {
+  apiKey = '用于 iOS 的 apiKey';
+}
+if (Platform.OS === 'android') {
+  apiKey = '用于 Android 的 apiKey';
+}
 
 // 设置 高德地图 apiKey
 AMapGeolocation.setApiKey(apiKey);
