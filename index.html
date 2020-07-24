@@ -76,8 +76,12 @@
 				</details>
 				<details>
 					<summary>iOS：高德地图包需要 WiFi 权限</summary>
+					<br />
 					<p>iOS 端高德地图包需要 WiFi 权限，否则报如下警告：</p>
-					<pre><code>nehelper sent invalid result code [<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> Wi-Fi information request</code></pre><img src="./imgs/xcode.png" />
+					<pre><code>nehelper sent invalid result code [<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> Wi-Fi information request</code></pre><p>需要在<a href="https://developer.apple.com">开发者账号中设置 WiFi 权限</a></p>
+					<img src="./imgs/identifiers.png" />
+					<p>同时需要在 Xcode 中添加 <code>Access WiFi Information</code> 能力选项</p>
+					<img src="./imgs/xcode.png" />
 				</details>
 				<details>
 					<summary>iOS：需要保证"Background Modes"中的"Location updates"处于选中状态</summary>
