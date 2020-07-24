@@ -1,0 +1,211 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>React Native Amap Geolocation</title>
+	<meta name="description" content="Documentation for React Native Amap Geolocation">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">React Native Amap Geolocation</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>React Native Amap Geolocation</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#uiwreact-native-amap-geolocation" id="uiwreact-native-amap-geolocation" style="color: inherit; text-decoration: none;">
+					<h2>@uiw/react-native-amap-geolocation</h2>
+				</a>
+				<p><a href="https://npmjs.org/package/@uiw/react-native-amap-geolocation"><img src="https://img.shields.io/npm/v/@uiw/react-native-amap-geolocation.svg" alt="NPM Version"></a></p>
+				<p>React Native 高德地图定位模块，支持 Android/iOS</p>
+				<a href="#注意事项" id="注意事项" style="color: inherit; text-decoration: none;">
+					<h2>注意事项</h2>
+				</a>
+				<details>
+					<summary>iOS：获取逆地理信息需要高德地图配置 apiKey</summary>
+					<img src="./imgs/amapkey.png" />
+				</details>
+				<details>
+					<summary>iOS：高德地图包需要 WiFi 权限</summary>
+					<p>iOS 端高德地图包需要 WiFi 权限，否则报如下警告：</p>
+					<pre><code>nehelper sent invalid result code [<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> Wi-Fi information request</code></pre><img src="./imgs/xcode.png" />
+				</details>
+				<details>
+					<summary>iOS：需要保证"Background Modes"中的"Location updates"处于选中状态</summary>
+					<img src="./imgs/xcode.png" />
+				</details>
+				<a href="#安装依赖" id="安装依赖" style="color: inherit; text-decoration: none;">
+					<h2>安装依赖</h2>
+				</a>
+				<pre><code class="language-bash">yarn add @uiw/react-native-amap-geolocation
+<span class="hljs-comment"># react-native version &gt;= 0.60+</span>
+$ <span class="hljs-built_in">cd</span> ios &amp;&amp; pod install</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { Platform } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-native&#x27;</span>;
+<span class="hljs-keyword">import</span> AMapGeolocation <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@uiw/react-native-amap-geolocation&#x27;</span>;
+
+<span class="hljs-keyword">let</span> apiKey = <span class="hljs-string">&#x27;&#x27;</span>;
+
+<span class="hljs-keyword">if</span> (Platform.OS === <span class="hljs-string">&#x27;ios&#x27;</span>) {
+  apiKey = <span class="hljs-string">&#x27;用于 iOS 的 apiKey&#x27;</span>;
+}
+<span class="hljs-keyword">if</span> (Platform.OS === <span class="hljs-string">&#x27;android&#x27;</span>) {
+  apiKey = <span class="hljs-string">&#x27;用于 Android 的 apiKey&#x27;</span>;
+}
+
+<span class="hljs-comment">// 设置 高德地图 apiKey</span>
+AMapGeolocation.setApiKey(apiKey);
+<span class="hljs-comment">// 指定所需的精度级别</span>
+AMapGeolocation.setDesiredAccuracy(<span class="hljs-number">3</span>);
+<span class="hljs-comment">// 连续定位是否返回逆地理信息</span>
+AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>);
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCurrentLocation</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> json = <span class="hljs-keyword">await</span> AMapGeolocation.getCurrentLocation();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;json:&#x27;</span>, json);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;error:&#x27;</span>, error);
+  }
+}</code></pre>
+				<a href="#错误处理" id="错误处理" style="color: inherit; text-decoration: none;">
+					<h2>错误处理</h2>
+				</a>
+				<pre><code class="language-bash">[NetworkInfo] Signal strength query returned error: Error Domain=NSPOSIXErrorDomain Code=13 <span class="hljs-string">&quot;Permission denied&quot;</span>, descriptor: &lt;CTServiceDescriptor 0x283317100, domain=1, instance=1&gt;</code></pre>
+				<p>在 <code>Product</code> -&gt; <code>Scheme</code> -&gt; <code>Edit Scheme</code> -&gt; <code>Run</code> -&gt; <code>Arguments</code> -&gt; <code>Environment Variables</code> 添加 <code>OS_ACTIVITY_MODE</code> <code>disable</code></p>
+				<pre><code class="language-bash">nehelper sent invalid result code [1] <span class="hljs-keyword">for</span> Wi-Fi information request</code></pre>
+				<p>配置 WiFi 权限</p>
+				<a href="#ios-配置后台定位" id="ios-配置后台定位" style="color: inherit; text-decoration: none;">
+					<h2>iOS 配置后台定位</h2>
+				</a>
+				<ol>
+					<li>左侧目录中选中工程名，开启 <code>TARGETS</code> -&gt; <code>Capabilities</code> -&gt; <code>Background Modes</code></li>
+					<li>在 <code>Background Modes</code> 中勾选 <code>Location updates</code></li>
+				</ol>
+				<a href="#其它" id="其它" style="color: inherit; text-decoration: none;">
+					<h2>其它</h2>
+				</a>
+				<p>当前工程基于 <a href="https://github.com/brodybits/create-react-native-module">@brodybits/create-react-native-module</a> 初始化。</p>
+				<pre><code class="language-bash">npx create-react-native-module --package-identifier com.uiwjs --object-class-name RNAMapGeolocation --generate-example AMapGeolocation --example-react-native-version 0.63.0 --module-name @uiw/react-native-amap-geolocation --github-account uiwjs --author-name <span class="hljs-string">&quot;Kenny Wong&quot;</span> --author-email <span class="hljs-string">&quot;wowohoo@qq.com&quot;</span></code></pre>
+				<a href="#相关连接" id="相关连接" style="color: inherit; text-decoration: none;">
+					<h2>相关连接</h2>
+				</a>
+				<ul>
+					<li><a href="https://lbs.amap.com/api/ios-location-sdk/download/">高德地图：iOS定位SDK V2.6.5</a></li>
+					<li><a href="https://lbs.amap.com/api/ios-location-sdk/guide/create-project/idfa-guide">高德地图：提交 AppStore 必读</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/coordinates.html" class="tsd-kind-icon">Coordinates</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/regeocode.html" class="tsd-kind-icon">Re<wbr>Geocode</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#addlocationlistener" class="tsd-kind-icon">add<wbr>Location<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getcurrentlocation" class="tsd-kind-icon">get<wbr>Current<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isstarted" class="tsd-kind-icon">is<wbr>Started</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#setapikey" class="tsd-kind-icon">set<wbr>Api<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#setdesiredaccuracy" class="tsd-kind-icon">set<wbr>Desired<wbr>Accuracy</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#setlocatingwithregeocode" class="tsd-kind-icon">set<wbr>Locating<wbr>With<wbr>ReGeocode</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#start" class="tsd-kind-icon">start</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#stop" class="tsd-kind-icon">stop</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
