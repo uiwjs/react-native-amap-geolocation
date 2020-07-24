@@ -17,11 +17,19 @@ React Native 高德地图定位模块，支持 Android/iOS
 <details>
 <summary>iOS：高德地图包需要 WiFi 权限</summary>
 
+<br />
+
 iOS 端高德地图包需要 WiFi 权限，否则报如下警告：
 
 ```
 nehelper sent invalid result code [1] for Wi-Fi information request
 ```
+
+需要在[开发者账号中设置 WiFi 权限](https://developer.apple.com)
+
+<img src="./imgs/identifiers.png" />
+
+同时需要在 Xcode 中添加 `Access WiFi Information` 能力选项
 
 <img src="./imgs/xcode.png" />
 
