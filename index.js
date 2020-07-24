@@ -23,6 +23,12 @@ export default class AMapGeolocation {
     return NativeModules.RNAMapGeolocation.stop();
   }
   /**
+   * 是否已经开始持续定位了
+   */
+  static isStarted() {
+    return NativeModules.RNAMapGeolocation.isStarted();
+  }
+  /**
    * 定位超时时间，最低2s
    * @param {number} number 默认设置为2s
    */
@@ -67,9 +73,12 @@ export default class AMapGeolocation {
   /**
    * 连续定位是否返回逆地理信息，默认NO。
    * Android 默认返回逆地理编码，而 iOS 需要手动设置。
+   * @platform ios
    */
   static setLocatingWithReGeocode(isReGeocode) {
-    return NativeModules.RNAMapGeolocation.setLocatingWithReGeocode(isReGeocode);
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setLocatingWithReGeocode(isReGeocode);
+    }
   }
   /**
    * 连续定位监听事件

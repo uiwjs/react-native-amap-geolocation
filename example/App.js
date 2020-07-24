@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import { Platform, StyleSheet, Text, View, Button, SafeAreaView  } from 'react-native';
 import AMapGeolocation from '@uiw/react-native-amap-geolocation';
 
 export default class App extends Component {
   state = {
     location: '',
     isListener: false,
+    isStarted: false,
   };
   componentDidMount() {
     let apiKey = ''
@@ -38,6 +39,12 @@ export default class App extends Component {
       console.log('json:-error-->>>', error);
     }
   }
+  getLocationState = async () => {
+    const isStarted = await AMapGeolocation.isStarted();
+    if (isStarted) {
+      this.setState({ isStarted });
+    }
+  }
   locationListener = () => {
     this.setState({
       isListener: !this.state.isListener
@@ -52,23 +59,30 @@ export default class App extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>☆AMapGeolocation Example☆</Text>
-        <Button
-          onPress={this.getCurrentLocation}
-          title="获取当前定位信息"
-          color="#841584"
-        />
-        <Button
-          onPress={this.locationListener}
-          // title="获取当前定位信息"
-          title={`${this.state.isListener ? '关闭' : '开启'}连续监听定位`}
-          color="#841584"
-        />
-        <Text>
-          {this.state.location}
-        </Text>
-      </View>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>☆AMapGeolocation Example☆</Text>
+          <Button
+            onPress={this.getLocationState}
+            title={`获取连续定位状态: ${this.state.isStarted.toString()}`}
+            color="#841584"
+          />
+          <Button
+            onPress={this.getCurrentLocation}
+            title="获取当前定位信息"
+            color="#841584"
+          />
+          <Button
+            onPress={this.locationListener}
+            // title="获取当前定位信息"
+            title={`${this.state.isListener ? '关闭' : '开启'}连续监听定位`}
+            color="#841584"
+          />
+          <Text>
+            {this.state.location}
+          </Text>
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -76,8 +90,8 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {

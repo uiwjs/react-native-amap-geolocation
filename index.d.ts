@@ -1,5 +1,5 @@
 
-declare namespace AMapGeolocation {
+declare module "@uiw/react-native-amap-geolocation" {
   /**
    * 坐标信息
    * @see https://developer.mozilla.org/zh-CN/docs/Web/API/Coordinates
@@ -103,7 +103,7 @@ declare namespace AMapGeolocation {
   }
   /**
    * 配置高德地图 Key
-   * @param apiKey 获取key: https://lbs.amap.com/api/ios-location-sdk/guide/create-project/get-key
+   * @param apiKey [搞得获取 key 文档地址](https://lbs.amap.com/api/ios-location-sdk/guide/create-project/get-key)
    */
   export function setApiKey(scheme: string): void;
   /**
@@ -114,6 +114,10 @@ declare namespace AMapGeolocation {
    * 停止更新位置信息
    */
   export function stop(): void;
+  /**
+   * 是否已经开始持续定位了
+   */
+  export function isStarted(): Promise<Boolean>;
   /**
    * 用于指定所需的精度级别。
    * 单位米，默认为 kCLLocationAccuracyBest。定位服务会尽可能去获取满足desiredAccuracy的定位结果，但不保证一定会得到满足期望的结果。
@@ -134,6 +138,7 @@ declare namespace AMapGeolocation {
   export function setDesiredAccuracy(accuracy: 0 | 1 | 2 | 3 | 4 | 5): void;
   /**
    * 获取当前定位
+   * 默认只获取经纬度，通过 {@linkcode setLocatingWithReGeocode}  设置，是否返回逆地理信息
    */
   export function getCurrentLocation(): Promise<Coordinates | ReGeocode>;
   /**

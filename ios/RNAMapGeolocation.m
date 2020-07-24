@@ -4,6 +4,7 @@
     AMapLocationManager *_manager;
     CLLocationManager *_clManager;
     BOOL _isStarted;
+    BOOL _locatingWithReGeocode;
 }
 
 RCT_EXPORT_MODULE()
@@ -30,15 +31,12 @@ RCT_EXPORT_MODULE()
         [_manager setPausesLocationUpdatesAutomatically: NO];
         // 设置允许在后台定位
         [_manager setAllowsBackgroundLocationUpdates: YES];
-        // 设置允许连续定位逆地理
-        [_manager setLocatingWithReGeocode:YES];
         
         [[AMapServices sharedServices] setEnableHTTPS:YES];
 
         _clManager = [CLLocationManager new];
+        _locatingWithReGeocode = NO;
         _isStarted = NO;
-        _isStarted = NO;
-
     }
     return self;
 }
@@ -89,14 +87,9 @@ RCT_EXPORT_METHOD(setDesiredAccuracy: (NSInteger)accuracy) {
 }
 
 // 是否已经开始定位了
-RCT_EXPORT_METHOD(isStarted) {
-    _isStarted = YES;
-    [_manager startUpdatingLocation];
-}
-
-
-RCT_EXPORT_METHOD(isStarted: resolver: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject) {
-    resolve(@[@(_isStarted)]);
+RCT_REMAP_METHOD(isStarted, resolver: (RCTPromiseResolveBlock)resolve
+    rejecter:(RCTPromiseRejectBlock)reject) {
+    resolve(@(_isStarted));
 }
 
 // 开始定位
@@ -113,10 +106,12 @@ RCT_EXPORT_METHOD(stop) {
 
 // 连续定位是否返回逆地理信息，默认NO。
 RCT_EXPORT_METHOD(setLocatingWithReGeocode: (BOOL)value) {
+    _locatingWithReGeocode = value;
     [_manager setLocatingWithReGeocode: value];
 }
 
 // 获取当前定位
+// 默认只获取经纬度，通过 setLocatingWithReGeocode 设置，是否返回逆地理信息
 RCT_EXPORT_METHOD(getCurrentLocation: (RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     [_clManager requestWhenInUseAuthorization];
@@ -124,7 +119,7 @@ RCT_EXPORT_METHOD(getCurrentLocation: (RCTPromiseResolveBlock)resolve rejecter:(
     // - kCLAuthorizationStatusAuthorizedAlways 用户已授权在任何时间使用其位置。
     // - kCLAuthorizationStatusNotDetermined 用户尚未对此应用做出选择
     if (status == kCLAuthorizationStatusAuthorizedAlways || status ==  kCLAuthorizationStatusAuthorizedWhenInUse || status ==  kCLAuthorizationStatusNotDetermined) {
-        [_manager requestLocationWithReGeocode: YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        [_manager requestLocationWithReGeocode: _locatingWithReGeocode completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
             if (error) {
                 reject([NSString stringWithFormat:@"%ld",(long)error.code], error.localizedDescription, error);
             } else {
@@ -133,9 +128,9 @@ RCT_EXPORT_METHOD(getCurrentLocation: (RCTPromiseResolveBlock)resolve rejecter:(
                 if (regeocode) {
                     NSLog(@"reGeocode:逆地理信息:%@", regeocode);
                 }
-                 id json = [self json:location reGeocode:regeocode];
-                 [NSUserDefaults.standardUserDefaults setObject: json forKey: RNAMapGeolocation.storeKey];
-                 resolve(json);
+                id json = [self json:location reGeocode:regeocode];
+                [NSUserDefaults.standardUserDefaults setObject: json forKey: RNAMapGeolocation.storeKey];
+                resolve(json);
             }
         }];
     } else {
