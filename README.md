@@ -3,7 +3,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/@uiw/react-native-amap-geolocation.svg)](https://npmjs.org/package/@uiw/react-native-amap-geolocation)
 
-React Native 高德地图定位模块，支持 Android/iOS
+React Native 高德地图定位模块，支持 Android/iOS。[完整的接口文档](https://uiwjs.github.io/react-native-amap-geolocation/)
 
 ## 注意事项
 
@@ -73,7 +73,7 @@ yarn add @uiw/react-native-amap-geolocation
 $ cd ios && pod install
 ```
 
-## Usage
+## 基本用法
 
 ```javascript
 import { Platform } from 'react-native';
@@ -94,7 +94,7 @@ AMapGeolocation.setApiKey(apiKey);
 AMapGeolocation.setDesiredAccuracy(3);
 // Android 指定所需的精度级别，可选设置，默认 高精度定位模式
 AMapGeolocation.setLocationMode(1);
-// 连续定位是否返回逆地理信息
+// 定位是否返回逆地理信息
 AMapGeolocation.setLocatingWithReGeocode(true);
 
 async function getCurrentLocation(){
@@ -105,6 +105,52 @@ async function getCurrentLocation(){
     console.log('error:', error);
   }
 }
+```
+
+## 定位监听函数
+
+
+```js
+import AMapGeolocation from '@uiw/react-native-amap-geolocation';
+
+let apiKey = '';
+if (Platform.OS === 'ios') {
+  apiKey = '用于 iOS 的 apiKey';
+}
+if (Platform.OS === 'android') {
+  apiKey = '用于 Android 的 apiKey';
+}
+
+// 设置 高德地图 apiKey
+AMapGeolocation.setApiKey(apiKey);
+// 定位是否返回逆地理信息
+AMapGeolocation.setLocatingWithReGeocode(true);
+// 当设备可以正常联网时，还可以返回该定位点的对应的中国境内位置信息（包括：省、市、区/县以及详细地址）。
+AMapGeolocation.addLocationListener((location) => {
+  console.log('返回定位信息', location);
+  this.setState({
+    location: JSON.stringify(location, null, 2), 
+  });
+});
+```
+
+## 逆地理编码
+
+```js
+import AMapGeolocation from '@uiw/react-native-amap-geolocation';
+
+let apiKey = '';
+if (Platform.OS === 'ios') {
+  apiKey = '用于 iOS 的 apiKey';
+}
+if (Platform.OS === 'android') {
+  apiKey = '用于 Android 的 apiKey';
+}
+
+// 设置 高德地图 apiKey
+AMapGeolocation.setApiKey(apiKey);
+// 定位是否返回逆地理信息
+AMapGeolocation.setLocatingWithReGeocode(true);
 ```
 
 ## 错误处理
