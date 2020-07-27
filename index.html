@@ -66,7 +66,7 @@
 					<h2>@uiw/react-native-amap-geolocation</h2>
 				</a>
 				<p><a href="https://npmjs.org/package/@uiw/react-native-amap-geolocation"><img src="https://img.shields.io/npm/v/@uiw/react-native-amap-geolocation.svg" alt="NPM Version"></a></p>
-				<p>React Native 高德地图定位模块，支持 Android/iOS</p>
+				<p>React Native 高德地图定位模块，支持 Android/iOS。<a href="https://uiwjs.github.io/react-native-amap-geolocation/">完整的接口文档</a></p>
 				<a href="#注意事项" id="注意事项" style="color: inherit; text-decoration: none;">
 					<h2>注意事项</h2>
 				</a>
@@ -104,8 +104,8 @@
 				<pre><code class="language-bash">yarn add @uiw/react-native-amap-geolocation
 <span class="hljs-comment"># react-native version &gt;= 0.60+</span>
 $ <span class="hljs-built_in">cd</span> ios &amp;&amp; pod install</code></pre>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
+				<a href="#基本用法" id="基本用法" style="color: inherit; text-decoration: none;">
+					<h2>基本用法</h2>
 				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { Platform } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-native&#x27;</span>;
 <span class="hljs-keyword">import</span> AMapGeolocation <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@uiw/react-native-amap-geolocation&#x27;</span>;
@@ -125,7 +125,7 @@ AMapGeolocation.setApiKey(apiKey);
 AMapGeolocation.setDesiredAccuracy(<span class="hljs-number">3</span>);
 <span class="hljs-comment">// Android 指定所需的精度级别，可选设置，默认 高精度定位模式</span>
 AMapGeolocation.setLocationMode(<span class="hljs-number">1</span>);
-<span class="hljs-comment">// 连续定位是否返回逆地理信息</span>
+<span class="hljs-comment">// 定位是否返回逆地理信息</span>
 AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>);
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCurrentLocation</span>(<span class="hljs-params"></span>)</span>{
@@ -136,6 +136,47 @@ AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>)
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;error:&#x27;</span>, error);
   }
 }</code></pre>
+				<a href="#定位监听函数" id="定位监听函数" style="color: inherit; text-decoration: none;">
+					<h2>定位监听函数</h2>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> AMapGeolocation <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@uiw/react-native-amap-geolocation&#x27;</span>;
+
+<span class="hljs-keyword">let</span> apiKey = <span class="hljs-string">&#x27;&#x27;</span>;
+<span class="hljs-keyword">if</span> (Platform.OS === <span class="hljs-string">&#x27;ios&#x27;</span>) {
+  apiKey = <span class="hljs-string">&#x27;用于 iOS 的 apiKey&#x27;</span>;
+}
+<span class="hljs-keyword">if</span> (Platform.OS === <span class="hljs-string">&#x27;android&#x27;</span>) {
+  apiKey = <span class="hljs-string">&#x27;用于 Android 的 apiKey&#x27;</span>;
+}
+
+<span class="hljs-comment">// 设置 高德地图 apiKey</span>
+AMapGeolocation.setApiKey(apiKey);
+<span class="hljs-comment">// 定位是否返回逆地理信息</span>
+AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>);
+<span class="hljs-comment">// 当设备可以正常联网时，还可以返回该定位点的对应的中国境内位置信息（包括：省、市、区/县以及详细地址）。</span>
+AMapGeolocation.addLocationListener(<span class="hljs-function">(<span class="hljs-params">location</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;返回定位信息&#x27;</span>, location);
+  <span class="hljs-built_in">this</span>.setState({
+    <span class="hljs-attr">location</span>: <span class="hljs-built_in">JSON</span>.stringify(location, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>), 
+  });
+});</code></pre>
+				<a href="#逆地理编码" id="逆地理编码" style="color: inherit; text-decoration: none;">
+					<h2>逆地理编码</h2>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> AMapGeolocation <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@uiw/react-native-amap-geolocation&#x27;</span>;
+
+<span class="hljs-keyword">let</span> apiKey = <span class="hljs-string">&#x27;&#x27;</span>;
+<span class="hljs-keyword">if</span> (Platform.OS === <span class="hljs-string">&#x27;ios&#x27;</span>) {
+  apiKey = <span class="hljs-string">&#x27;用于 iOS 的 apiKey&#x27;</span>;
+}
+<span class="hljs-keyword">if</span> (Platform.OS === <span class="hljs-string">&#x27;android&#x27;</span>) {
+  apiKey = <span class="hljs-string">&#x27;用于 Android 的 apiKey&#x27;</span>;
+}
+
+<span class="hljs-comment">// 设置 高德地图 apiKey</span>
+AMapGeolocation.setApiKey(apiKey);
+<span class="hljs-comment">// 定位是否返回逆地理信息</span>
+AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>);</code></pre>
 				<a href="#错误处理" id="错误处理" style="color: inherit; text-decoration: none;">
 					<h2>错误处理</h2>
 				</a>
