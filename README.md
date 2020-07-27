@@ -24,7 +24,7 @@ B. 获取 `PackageName`，获取路径 `<项目名称>/android/app/src/main/Andr
 
 C. 在高德地图账号中设置 `SHA1` 和 `PackageName`。
 
-<img src="https://a.amap.com/lbs/static/img/2017dev_android_key.png" />
+<img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/sha1.png" />
 
 D. 按照上面步骤正确设置你的 `apiKey` 才会起作用。
 
@@ -33,7 +33,7 @@ D. 按照上面步骤正确设置你的 `apiKey` 才会起作用。
 <details>
 <summary>iOS：获取逆地理信息需要高德地图配置 apiKey</summary>
 
-<img src="./imgs/amapkey.png" />
+<img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/amapkey.png" />
 
 </details>
 
@@ -50,18 +50,18 @@ nehelper sent invalid result code [1] for Wi-Fi information request
 
 需要在[开发者账号中设置 WiFi 权限](https://developer.apple.com)
 
-<img src="./imgs/identifiers.png" />
+<img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/identifiers.png" />
 
 同时需要在 Xcode 中添加 `Access WiFi Information` 能力选项
 
-<img src="./imgs/xcode.png" />
+<img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/xcode.png" />
 
 </details>
 
 <details>
 <summary>iOS：需要保证"Background Modes"中的"Location updates"处于选中状态</summary>
 
-<img src="./imgs/xcode.png" />
+<img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/xcode.png" />
 
 </details>
 
