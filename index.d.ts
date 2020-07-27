@@ -121,7 +121,8 @@ export interface ReGeocode extends Coordinates {
 }
 /**
  * 配置高德地图 Key
- * @param apiKey 
+ * @param apiKey  
+ * -
  * - [高德获取 iOS key 文档地址](https://lbs.amap.com/api/ios-location-sdk/guide/create-project/get-key)
  * - [高德获取 Android key 文档地址](https://lbs.amap.com/api/android-location-sdk/guide/create-project/get-key)
  * 

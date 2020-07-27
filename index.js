@@ -82,7 +82,7 @@ export default class AMapGeolocation {
         case 3: str = 'Device_Sensors'; break;
         default: break;
       }
-      return NativeModules.RNAMapGeolocation.setLocationMode(accuracy);
+      return NativeModules.RNAMapGeolocation.setLocationMode(mode);
     }
   }
   /**
