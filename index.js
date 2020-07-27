@@ -114,6 +114,7 @@ export default class AMapGeolocation {
       return NativeModules.RNAMapGeolocation.setNeedAddress(isReGeocode);
     }
   }
+
   /**
    * 设置发起定位请求的时间间隔，单位：毫秒，默认值：2000毫秒
    * @platform android
@@ -123,6 +124,7 @@ export default class AMapGeolocation {
       return NativeModules.RNAMapGeolocation.setInterval(interval);
     }
   }
+
   /**
    * 设置是否允许调用 WIFI 刷新。
    * 默认值为true，当设置为false时会停止主动调用WIFI刷新，将会极大程度影响定位精度，但可以有效的降低定位耗电
@@ -134,17 +136,29 @@ export default class AMapGeolocation {
       return NativeModules.RNAMapGeolocation.setWifiScan(isWifiPassiveScan);
     }
   }
+
   /**
    * 设置是否使用设备传感器。是否开启设备传感器，当设置为true时，网络定位可以返回海拔、角度和速度。
-   * [高德地图 setSensorEnable 文档](http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/unzip/Android_Location_Doc/index.html)
    * @default false
    * @platform android
    */
   static setSensorEnable(interval) {
     if (Platform.OS === "android") {
-      return NativeModules.RNAMapGeolocation.setInterval(interval);
+      return NativeModules.RNAMapGeolocation.setSensorEnable(interval);
     }
   }
+
+  /**
+   * 设置逆地理信息的语言，目前之中中文和英文。
+   * @default DEFAULT
+   * @platform android
+   */
+  static setGeoLanguage(language = 'DEFAULT') {
+    if (Platform.OS === "android") {
+      return NativeModules.RNAMapGeolocation.setGeoLanguage(language);
+    }
+  }
+
   /**
    * 连续定位监听事件
    * @param {Function} listener 

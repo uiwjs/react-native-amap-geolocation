@@ -144,12 +144,6 @@ export function stop(): void;
 export function isStarted(): Promise<Boolean>;
 /**
  * 用于指定所需的精度级别。
- * 单位米，默认为 kCLLocationAccuracyBest。定位服务会尽可能去获取满足desiredAccuracy的定位结果，但不保证一定会得到满足期望的结果。
- * 注意：设置为 kCLLocationAccuracyBest 或 kCLLocationAccuracyBestForNavigation 时，
- * 单次定位会在达到 locationTimeout 设定的时间后，将时间内获取到的最高精度的定位结果返回。
- * 高德提供了 kCLLocationAccuracyBest 参数，设置该参数可以获取到精度在10m 左右的定位结果，但是相应的需要付出比较长的时间（10s左右），
- * 越高的精度需要持续定位时间越长。
- * 推荐：kCLLocationAccuracyHundredMeters，一次还不错的定位，偏差在百米左右，超时时间设置在2s-3s左右即可。
  * @param {number} accuracy `0~5`
  * - 0 => kCLLocationAccuracyBestForNavigation
  * - 1 => kCLLocationAccuracyBest
@@ -158,6 +152,13 @@ export function isStarted(): Promise<Boolean>;
  * - 4 => kCLLocationAccuracyKilometer
  * - 5 => kCLLocationAccuracyThreeKilometers
  * @platform ios
+ * 
+ * 单位米，默认为 kCLLocationAccuracyBest。定位服务会尽可能去获取满足desiredAccuracy的定位结果，但不保证一定会得到满足期望的结果。  
+ * 注意：设置为 kCLLocationAccuracyBest 或 kCLLocationAccuracyBestForNavigation 时，
+ * 单次定位会在达到 locationTimeout 设定的时间后，将时间内获取到的最高精度的定位结果返回。  
+ * 高德提供了 kCLLocationAccuracyBest 参数，设置该参数可以获取到精度在10m 左右的定位结果，但是相应的需要付出比较长的时间（10s左右），
+ * 越高的精度需要持续定位时间越长。  
+ * 推荐：kCLLocationAccuracyHundredMeters，一次还不错的定位，偏差在百米左右，超时时间设置在2s-3s左右即可。
  */
 export function setDesiredAccuracy(accuracy: 0 | 1 | 2 | 3 | 4 | 5): void;
 /**
@@ -179,13 +180,15 @@ export function getCurrentLocation(): Promise<Coordinates | ReGeocode>;
  */
 export function setLocatingWithReGeocode(isReGeocode: boolean): void;
 /**
- * 设置定位模式。默认值：Hight_Accuracy 高精度模式
+ * 设置定位模式。
+ * @param {number} mode `1~3`
+ * @platform android
+ * 
+ * 默认值：Hight_Accuracy 高精度模式
  * android 默认定位模式，目前支持三种定位模式
  * - 1 => `Hight_Accuracy` 高精度定位模式：在这种定位模式下，将同时使用高德网络定位和卫星定位,优先返回精度高的定位
  * - 2 => `Battery_Saving` 低功耗定位模式：在这种模式下，将只使用高德网络定位
  * - 3 => `Device_Sensors` 仅设备定位模式：在这种模式下，将只使用卫星定位。
- * @param {number} mode `1~3`
- * @platform android
  */
 export function setLocationMode(mode: 1 | 2 | 3): void;
 /**
@@ -196,7 +199,6 @@ export function setLocationMode(mode: 1 | 2 | 3): void;
 export function setOnceLocation(isOnceLocation: boolean): void;
 /**
  * 设置是否使用设备传感器。是否开启设备传感器，当设置为true时，网络定位可以返回海拔、角度和速度。
- * [高德地图 setSensorEnable 文档](http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/unzip/Android_Location_Doc/index.html)
  * @default false
  * @platform android
  */
@@ -204,11 +206,16 @@ export function setSensorEnable(sensorEnable: boolean): void;
 /**
  * 设置是否允许调用 WIFI 刷新。
  * 默认值为true，当设置为false时会停止主动调用WIFI刷新，将会极大程度影响定位精度，但可以有效的降低定位耗电
- * [高德地图 setWifiScan 文档](http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/unzip/Android_Location_Doc/index.html)
  * @platform android
  * @default true
  */
 export function setWifiScan(isOnceLocation: boolean): void;
+/**
+ * 设置逆地理信息的语言，目前之中中文和英文。
+ * @platform android
+ * @default DEFAULT
+ */
+export function setGeoLanguage(language: 'DEFAULT' | 'EN' | 'ZH'): void;
 /**
  * 连续定位监听事件
  * @param {Function} listener 

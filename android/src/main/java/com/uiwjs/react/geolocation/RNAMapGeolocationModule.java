@@ -146,6 +146,17 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
         option.setOnceLocation(isOnceLocation);
         client.setLocationOption(option);
     }
+    /**
+     * 设置逆地理信息的语言,目前之中中文和英文
+     */
+    @ReactMethod
+    public void setGeoLanguage(String language) {
+        if (client == null) {
+            return;
+        }
+        option.setGeoLanguage(AMapLocationClientOption.GeoLanguage.valueOf(language));
+        client.setLocationOption(option);
+    }
 
     /**
      * 设置定位模式。默认值：Hight_Accuracy 高精度模式
@@ -188,6 +199,12 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
         client.setLocationOption(option);
     }
 
+    /**
+     * 设置是否使用设备传感器。是否开启设备传感器，当设置为true时，网络定位可以返回海拔、角度和速度。
+     * [高德地图 setSensorEnable 文档](http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/unzip/Android_Location_Doc/index.html)
+     * @default false
+     * @platform android
+     */
     @ReactMethod
     public void setSensorEnable(boolean sensorEnable) {
         if (client == null) {
