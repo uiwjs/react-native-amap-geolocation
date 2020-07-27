@@ -128,6 +128,9 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void setInterval(int interval) {
+        if (client == null) {
+            return;
+        }
         option.setInterval(interval);
         client.setLocationOption(option);
     }
@@ -137,6 +140,9 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void setOnceLocation(boolean isOnceLocation) {
+        if (client == null) {
+            return;
+        }
         option.setOnceLocation(isOnceLocation);
         client.setLocationOption(option);
     }
@@ -150,6 +156,9 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void setLocationMode(String mode) {
+        if (client == null) {
+            return;
+        }
         option.setLocationMode(AMapLocationClientOption.AMapLocationMode.valueOf(mode));
         client.setLocationOption(option);
     }
@@ -159,10 +168,25 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void setNeedAddress(boolean value) {
+        if (client == null) {
+            return;
+        }
         option.setNeedAddress(value);
         client.setLocationOption(option);
     }
 
+    /**
+     * 设置是否允许调用WIFI刷新 默认值为true，当设置为false时会停止主动调用WIFI刷新，将会极大程度影响定位精度，但可以有效的降低定位耗电
+     * 默认值：true, 返回地址信息
+     */
+    @ReactMethod
+    public void setWifiScan(boolean isWifiPassiveScan) {
+        if (client == null) {
+            return;
+        }
+        option.setWifiScan(isWifiPassiveScan);
+        client.setLocationOption(option);
+    }
     private DeviceEventManagerModule.RCTDeviceEventEmitter getDeviceEventEmitter() {
         if (eventEmitter == null) {
             eventEmitter = reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);

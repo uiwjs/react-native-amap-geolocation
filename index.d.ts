@@ -195,6 +195,13 @@ export function setLocationMode(mode: 1 | 2 | 3): void;
  */
 export function setOnceLocation(isOnceLocation): void;
 /**
+ * 设置是否允许调用 WIFI 刷新。
+ * 默认值为true，当设置为false时会停止主动调用WIFI刷新，将会极大程度影响定位精度，但可以有效的降低定位耗电
+ * @platform android
+ * @default true
+ */
+export function setWifiScan(isOnceLocation): void;
+/**
  * 连续定位监听事件
  * @param {Function} listener 
  */

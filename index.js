@@ -97,7 +97,9 @@ export default class AMapGeolocation {
    * @platform android
    */
   static setOnceLocation(isOnceLocation) {
-    return NativeModules.RNAMapGeolocation.setOnceLocation(isOnceLocation);
+    if (Platform.OS === "android") {
+      return NativeModules.RNAMapGeolocation.setOnceLocation(isOnceLocation);
+    }
   }
   /**
    * 定位是否返回逆地理信息，为了与 android 保持一致，默认 值为 true。
@@ -119,6 +121,17 @@ export default class AMapGeolocation {
   static setInterval(interval) {
     if (Platform.OS === "android") {
       return NativeModules.RNAMapGeolocation.setInterval(interval);
+    }
+  }
+  /**
+   * 设置是否允许调用 WIFI 刷新。
+   * 默认值为true，当设置为false时会停止主动调用WIFI刷新，将会极大程度影响定位精度，但可以有效的降低定位耗电
+   * @platform android
+   * @default true
+   */
+  static setWifiScan(interval) {
+    if (Platform.OS === "android") {
+      return NativeModules.RNAMapGeolocation.setWifiScan(interval);
     }
   }
   /**
