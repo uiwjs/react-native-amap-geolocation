@@ -33,8 +33,9 @@ export interface Coordinates {
   timestamp: number;
   /**
    * 是否有可用坐标
+   * @platform ios
    */
-  isAvailableCoordinate: boolean;
+  isAvailableCoordinate?: boolean;
 }
 
 /**
@@ -50,15 +51,15 @@ export interface ReGeocode extends Coordinates {
    */
   country: string;
   /**
-   * 省/直辖市
+   * 省/直辖市，如 `湖北省`
    */
   province: string;
   /**
-   * 市
+   * 市，如 `武汉市`。对应城市{@link cityCode}编码
    */
   city: string;
   /**
-   * 区
+   * 区，如 `武昌区`。对应区域{@link adCode}编码
    */
   district: string;
 
@@ -77,11 +78,11 @@ export interface ReGeocode extends Coordinates {
   /**
    * 城市编码
    */
-  citycode: string;
+  cityCode: string;
   /**
    * 区域编码
    */
-  adcode: string;
+  adCode: string;
   /**
    * 街道名称
    */
@@ -89,19 +90,43 @@ export interface ReGeocode extends Coordinates {
   /**
    * 门牌号
    */
-  number: string;
+  streetNumber: string;
   /**
    * 兴趣点名称
    */
-  POIName: string;
+  poiName: string;
   /**
    * 所属兴趣点名称
    */
-  AOIName: string;
+  aoiName: string;
+  /**
+   * 获取定位信息描述
+   * @version SDK2.0.0 开始支持
+   * @platform android
+   */
+  description?: string;
+  /**
+   * 获取坐标系类型 高德定位sdk会返回两种坐标系：
+   * 坐标系 AMapLocation.COORD_TYPE_GCJ02 -- GCJ02
+   * 坐标系 AMapLocation.COORD_TYPE_WGS84 -- WGS84
+   * 国外定位时返回的是WGS84坐标系
+   * @platform android
+   */
+  coordType?: 'GCJ02' | 'WGS84';
+  /**
+   * 返回支持室内定位的建筑物ID信息
+   * @platform android
+   */
+  buildingId?: string;
 }
 /**
  * 配置高德地图 Key
- * @param apiKey [搞得获取 key 文档地址](https://lbs.amap.com/api/ios-location-sdk/guide/create-project/get-key)
+ * @param apiKey 
+ * - [高德获取 iOS key 文档地址](https://lbs.amap.com/api/ios-location-sdk/guide/create-project/get-key)
+ * - [高德获取 Android key 文档地址](https://lbs.amap.com/api/android-location-sdk/guide/create-project/get-key)
+ * 
+ * 注意：安卓设置 key 很重要，由于在 android 平台必须优先设置 ApiKey 才能初始化 地图实例。
+ * 所以这个方法在android 平台下，还附带了初始化地图实例。
  */
 export function setApiKey(scheme: string): void;
 /**
@@ -135,16 +160,33 @@ export function isStarted(): Promise<Boolean>;
  */
 export function setDesiredAccuracy(accuracy: 0 | 1 | 2 | 3 | 4 | 5): void;
 /**
+ * 设置发起定位请求的时间间隔，单位：毫秒，默认值：2000毫秒
+ * @platform android
+ * @default 2000
+ */
+export function setInterval(interval: number): void;
+/**
  * 获取当前定位
- * 默认只获取经纬度，通过 {@linkcode setLocatingWithReGeocode}  设置，是否返回逆地理信息
+ * 默认只获取经纬度，`iOS` 通过 {@linkcode setLocatingWithReGeocode}  设置，是否返回逆地理信息
  */
 export function getCurrentLocation(): Promise<Coordinates | ReGeocode>;
 /**
- * 连续定位是否返回逆地理信息，默认NO。
- * Android 默认返回逆地理编码，而 iOS 需要手动设置。
- * @platform ios
+ * 定位是否返回逆地理信息，为了与 android 保持一致，默认 值为 true。
+ * @platform ios 默认值：false, 返回地址信息，需要手动设置
+ * @platform android 默认值：true, 返回地址信息
+ * @default true
  */
 export function setLocatingWithReGeocode(isReGeocode: boolean): void;
+/**
+ * 设置定位模式。默认值：Hight_Accuracy 高精度模式
+ * android 默认定位模式，目前支持三种定位模式
+ * - 1 => `Hight_Accuracy` 高精度定位模式：在这种定位模式下，将同时使用高德网络定位和卫星定位,优先返回精度高的定位
+ * - 2 => `Battery_Saving` 低功耗定位模式：在这种模式下，将只使用高德网络定位
+ * - 3 => `Device_Sensors` 仅设备定位模式：在这种模式下，将只使用卫星定位。
+ * @param {number} mode `1~3`
+ * @platform android
+ */
+export function setLocationMode(mode: 1 | 2 | 3): void;
 /**
  * 连续定位监听事件
  * @param {Function} listener 

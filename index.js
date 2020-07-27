@@ -65,19 +65,52 @@ export default class AMapGeolocation {
     }
   }
   /**
+   * 设置定位模式。默认值：Hight_Accuracy 高精度模式
+   * android 默认定位模式，目前支持三种定位模式
+   * - 1 => `Hight_Accuracy` 高精度定位模式：在这种定位模式下，将同时使用高德网络定位和卫星定位,优先返回精度高的定位
+   * - 2 => `Battery_Saving` 低功耗定位模式：在这种模式下，将只使用高德网络定位
+   * - 3 => `Device_Sensors` 仅设备定位模式：在这种模式下，将只使用卫星定位。
+   * @param {number} mode `1~3`
+   * @platform android
+   */
+  static setLocationMode(mode = 1) {
+    if (Platform.OS === "android") {
+      let str = 'Hight_Accuracy';
+      switch (mode) {
+        case 1: str = 'Hight_Accuracy'; break;
+        case 2: str = 'Battery_Saving'; break;
+        case 3: str = 'Device_Sensors'; break;
+        default: break;
+      }
+      return NativeModules.RNAMapGeolocation.setLocationMode(accuracy);
+    }
+  }
+  /**
    * 获取当前定位
    */
   static getCurrentLocation() {
     return NativeModules.RNAMapGeolocation.getCurrentLocation();
   }
   /**
-   * 连续定位是否返回逆地理信息，默认NO。
-   * Android 默认返回逆地理编码，而 iOS 需要手动设置。
-   * @platform ios
+   * 定位是否返回逆地理信息，为了与 android 保持一致，默认 值为 true。
+   * @platform ios 默认值：false, 返回地址信息，需要手动设置
+   * @platform android 默认值：true, 返回地址信息
    */
-  static setLocatingWithReGeocode(isReGeocode) {
+  static setLocatingWithReGeocode(isReGeocode = true) {
     if (Platform.OS === "ios") {
       return NativeModules.RNAMapGeolocation.setLocatingWithReGeocode(isReGeocode);
+    }
+    if (Platform.OS === "android") {
+      return NativeModules.RNAMapGeolocation.setNeedAddress(isReGeocode);
+    }
+  }
+  /**
+   * 设置发起定位请求的时间间隔，单位：毫秒，默认值：2000毫秒
+   * @platform android
+   */
+  static setInterval(interval) {
+    if (Platform.OS === "android") {
+      return NativeModules.RNAMapGeolocation.setInterval(interval);
     }
   }
   /**

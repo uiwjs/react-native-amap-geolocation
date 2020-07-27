@@ -71,8 +71,10 @@ repositories {
 }
 
 dependencies {
-    //noinspection GradleDynamicVersion
+    // noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
+    // 支付宝 SDK AAR 包所需的配置
+    implementation fileTree(dir: "libs", include: ["*.jar"])
 }
 
 def configureReactNativePom(def pom) {
@@ -82,7 +84,7 @@ def configureReactNativePom(def pom) {
         name packageJson.title
         artifactId packageJson.name
         version = packageJson.version
-        group = "com.uiwjs"
+        group = "com.uiwjs.react.geolocation"
         description packageJson.description
         url packageJson.repository.baseUrl
 

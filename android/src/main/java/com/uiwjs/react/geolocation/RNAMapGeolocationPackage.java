@@ -1,4 +1,4 @@
-package com.uiwjs;
+package com.uiwjs.react.geolocation;
 
 import java.util.Arrays;
 import java.util.Collections;

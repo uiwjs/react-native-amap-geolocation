@@ -104,7 +104,7 @@ RCT_EXPORT_METHOD(stop) {
     [_manager stopUpdatingLocation];
 }
 
-// 连续定位是否返回逆地理信息，默认NO。
+// 定位是否返回逆地理信息，默认NO。
 RCT_EXPORT_METHOD(setLocatingWithReGeocode: (BOOL)value) {
     _locatingWithReGeocode = value;
     [_manager setLocatingWithReGeocode: value];

@@ -21,7 +21,9 @@
     "baseUrl": "https://github.com/uiwjs/react-native-amap-geolocation"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "amap",
+    "geolocation"
   ],
   "author": {
     "name": "Kenny Wong",
