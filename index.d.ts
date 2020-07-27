@@ -189,6 +189,12 @@ export function setLocatingWithReGeocode(isReGeocode: boolean): void;
  */
 export function setLocationMode(mode: 1 | 2 | 3): void;
 /**
+ * 设置是否单次定位
+ * @default false
+ * @platform android
+ */
+export function setOnceLocation(isOnceLocation): void;
+/**
  * 连续定位监听事件
  * @param {Function} listener 
  */

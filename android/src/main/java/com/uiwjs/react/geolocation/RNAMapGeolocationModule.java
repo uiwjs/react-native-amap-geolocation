@@ -53,6 +53,16 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void getLastKnownLocation(Promise promise) {
+        if (client == null) {
+            promise.reject("-1", "尚未调用 setApiKey() 进行初始化");
+            return;
+        }
+        AMapLocation location = client.getLastKnownLocation();
+        promise.resolve(toJSON(location));
+    }
+
+    @ReactMethod
     public void setApiKey(String key) {
         if (client != null) {
             client.onDestroy();
@@ -72,11 +82,17 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void start() {
+        if (client == null) {
+            return;
+        }
         client.startLocation();
     }
 
     @ReactMethod
     public void stop() {
+        if (client == null) {
+            return;
+        }
         client.stopLocation();
     }
     @ReactMethod
@@ -115,7 +131,16 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
         option.setInterval(interval);
         client.setLocationOption(option);
     }
-    
+
+    /**
+     * 设置是否单次定位
+     */
+    @ReactMethod
+    public void setOnceLocation(boolean isOnceLocation) {
+        option.setOnceLocation(isOnceLocation);
+        client.setLocationOption(option);
+    }
+
     /**
      * 设置定位模式。默认值：Hight_Accuracy 高精度模式
      * android 默认定位模式，目前支持三种定位模式

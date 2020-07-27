@@ -92,6 +92,14 @@ export default class AMapGeolocation {
     return NativeModules.RNAMapGeolocation.getCurrentLocation();
   }
   /**
+   * 设置是否单次定位
+   * @default false
+   * @platform android
+   */
+  static setOnceLocation(isOnceLocation) {
+    return NativeModules.RNAMapGeolocation.setOnceLocation(isOnceLocation);
+  }
+  /**
    * 定位是否返回逆地理信息，为了与 android 保持一致，默认 值为 true。
    * @platform ios 默认值：false, 返回地址信息，需要手动设置
    * @platform android 默认值：true, 返回地址信息
