@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button, SafeAreaView  } from 'react-native';
+import { Platform, StyleSheet, Text, View, Button, SafeAreaView, ScrollView  } from 'react-native';
 import AMapGeolocation from '@uiw/react-native-amap-geolocation';
 
 export default class App extends Component {
@@ -13,18 +13,24 @@ export default class App extends Component {
     if (Platform.OS === 'ios') {
       apiKey = '00b74444d56a1f9e036b608a52f0da33';
     }
+    if (Platform.OS === 'android') {
+      apiKey = '2d36ea36f37fb156a691d27901db0897';
+    }
 
     if (apiKey) {
       AMapGeolocation.setApiKey(apiKey);
     }
+    // iOS 指定所需的精度级别
     AMapGeolocation.setDesiredAccuracy(3);
-    // 指定所需的精度级别
+    // Android 指定所需的精度级别，可选设置，默认 高精度定位模式
+    AMapGeolocation.setLocationMode(1);
+    // 定位是否返回逆地理信息
     AMapGeolocation.setLocatingWithReGeocode(true);
     // 当设备可以正常联网时，还可以返回该定位点的对应的中国境内位置信息（包括：省、市、区/县以及详细地址）。
     AMapGeolocation.addLocationListener((location) => {
       console.log('返回定位信息', location);
       this.setState({
-        location: JSON.stringify(location, null, 2),
+        location: JSON.stringify(location, null, 2), 
       });
     });
   }
@@ -78,9 +84,11 @@ export default class App extends Component {
             title={`${this.state.isListener ? '关闭' : '开启'}连续监听定位`}
             color="#841584"
           />
-          <Text>
-            {this.state.location}
-          </Text>
+          <ScrollView style={{ flex: 1 }}>
+            <Text>
+              {this.state.location}
+            </Text>
+          </ScrollView>
         </View>
       </SafeAreaView>
     );

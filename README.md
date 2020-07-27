@@ -90,8 +90,10 @@ if (Platform.OS === 'android') {
 
 // 设置 高德地图 apiKey
 AMapGeolocation.setApiKey(apiKey);
-// 指定所需的精度级别
+// iOS 指定所需的精度级别
 AMapGeolocation.setDesiredAccuracy(3);
+// Android 指定所需的精度级别，可选设置，默认 高精度定位模式
+AMapGeolocation.setLocationMode(1);
 // 连续定位是否返回逆地理信息
 AMapGeolocation.setLocatingWithReGeocode(true);
 
