@@ -671,7 +671,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.uiwjs.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uiwjs.react.geolocation;
 				PRODUCT_NAME = example;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -698,7 +698,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.uiwjs.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uiwjs.react.geolocation;
 				PRODUCT_NAME = example;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

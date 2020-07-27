@@ -1,4 +1,4 @@
-package com.example;
+package com.uiwjs.example.geolocation;
 
 import com.facebook.react.ReactActivity;
 
