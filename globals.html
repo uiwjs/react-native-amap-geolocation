@@ -80,6 +80,7 @@
 								<li class="tsd-kind-function"><a href="globals.html#isstarted" class="tsd-kind-icon">is<wbr>Started</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#setapikey" class="tsd-kind-icon">set<wbr>Api<wbr>Key</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#setdesiredaccuracy" class="tsd-kind-icon">set<wbr>Desired<wbr>Accuracy</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#setgeolanguage" class="tsd-kind-icon">set<wbr>Geo<wbr>Language</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#setinterval" class="tsd-kind-icon">set<wbr>Interval</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#setlocatingwithregeocode" class="tsd-kind-icon">set<wbr>Locating<wbr>With<wbr>ReGeocode</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#setlocationmode" class="tsd-kind-icon">set<wbr>Location<wbr>Mode</a></li>
@@ -105,7 +106,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L216">index.d.ts:216</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L223">index.d.ts:223</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -153,7 +154,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L173">index.d.ts:173</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L174">index.d.ts:174</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -176,7 +177,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L144">index.d.ts:144</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L144">index.d.ts:144</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -198,7 +199,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L132">index.d.ts:132</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L132">index.d.ts:132</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -226,22 +227,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L162">index.d.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L163">index.d.ts:163</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>用于指定所需的精度级别。
-										单位米，默认为 kCLLocationAccuracyBest。定位服务会尽可能去获取满足desiredAccuracy的定位结果，但不保证一定会得到满足期望的结果。
-										注意：设置为 kCLLocationAccuracyBest 或 kCLLocationAccuracyBestForNavigation 时，
-										单次定位会在达到 locationTimeout 设定的时间后，将时间内获取到的最高精度的定位结果返回。
-										高德提供了 kCLLocationAccuracyBest 参数，设置该参数可以获取到精度在10m 左右的定位结果，但是相应的需要付出比较长的时间（10s左右），
-										越高的精度需要持续定位时间越长。
-									推荐：kCLLocationAccuracyHundredMeters，一次还不错的定位，偏差在百米左右，超时时间设置在2s-3s左右即可。</p>
+									<p>用于指定所需的精度级别。</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>platform</dt>
 									<dd><p>ios</p>
+										<p>单位米，默认为 kCLLocationAccuracyBest。定位服务会尽可能去获取满足desiredAccuracy的定位结果，但不保证一定会得到满足期望的结果。
+											注意：设置为 kCLLocationAccuracyBest 或 kCLLocationAccuracyBestForNavigation 时，
+											单次定位会在达到 locationTimeout 设定的时间后，将时间内获取到的最高精度的定位结果返回。
+											高德提供了 kCLLocationAccuracyBest 参数，设置该参数可以获取到精度在10m 左右的定位结果，但是相应的需要付出比较长的时间（10s左右），
+											越高的精度需要持续定位时间越长。
+										推荐：kCLLocationAccuracyHundredMeters，一次还不错的定位，偏差在百米左右，超时时间设置在2s-3s左右即可。</p>
 									</dd>
 								</dl>
 							</div>
@@ -267,6 +268,42 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="setgeolanguage" class="tsd-anchor"></a>
+					<h3>set<wbr>Geo<wbr>Language</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Geo<wbr>Language<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"DEFAULT"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"EN"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ZH"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L218">index.d.ts:218</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>设置逆地理信息的语言，目前之中中文和英文。</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>platform</dt>
+									<dd><p>android</p>
+									</dd>
+									<dt>default</dt>
+									<dd><p>DEFAULT</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>language: <span class="tsd-signature-type">"DEFAULT"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"EN"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ZH"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="setinterval" class="tsd-anchor"></a>
 					<h3>set<wbr>Interval</h3>
 					<ul class="tsd-signatures tsd-kind-function">
@@ -276,7 +313,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L168">index.d.ts:168</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L169">index.d.ts:169</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -312,7 +349,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L180">index.d.ts:180</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L181">index.d.ts:181</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -351,22 +388,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L190">index.d.ts:190</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L193">index.d.ts:193</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>设置定位模式。默认值：Hight_Accuracy 高精度模式
-									android 默认定位模式，目前支持三种定位模式</p>
-									<ul>
-										<li>1 =&gt; <code>Hight_Accuracy</code> 高精度定位模式：在这种定位模式下，将同时使用高德网络定位和卫星定位,优先返回精度高的定位</li>
-										<li>2 =&gt; <code>Battery_Saving</code> 低功耗定位模式：在这种模式下，将只使用高德网络定位</li>
-										<li>3 =&gt; <code>Device_Sensors</code> 仅设备定位模式：在这种模式下，将只使用卫星定位。</li>
-									</ul>
+									<p>设置定位模式。</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>platform</dt>
 									<dd><p>android</p>
+										<p>默认值：Hight_Accuracy 高精度模式
+										android 默认定位模式，目前支持三种定位模式</p>
+										<ul>
+											<li>1 =&gt; <code>Hight_Accuracy</code> 高精度定位模式：在这种定位模式下，将同时使用高德网络定位和卫星定位,优先返回精度高的定位</li>
+											<li>2 =&gt; <code>Battery_Saving</code> 低功耗定位模式：在这种模式下，将只使用高德网络定位</li>
+											<li>3 =&gt; <code>Device_Sensors</code> 仅设备定位模式：在这种模式下，将只使用卫星定位。</li>
+										</ul>
 									</dd>
 								</dl>
 							</div>
@@ -393,7 +431,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L196">index.d.ts:196</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L199">index.d.ts:199</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -429,13 +467,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L203">index.d.ts:203</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L205">index.d.ts:205</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>设置是否使用设备传感器。是否开启设备传感器，当设置为true时，网络定位可以返回海拔、角度和速度。
-									<a href="http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/unzip/Android_Location_Doc/index.html">高德地图 setSensorEnable 文档</a></p>
+									<p>设置是否使用设备传感器。是否开启设备传感器，当设置为true时，网络定位可以返回海拔、角度和速度。</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>default</dt>
@@ -466,14 +503,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L211">index.d.ts:211</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L212">index.d.ts:212</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>设置是否允许调用 WIFI 刷新。
-										默认值为true，当设置为false时会停止主动调用WIFI刷新，将会极大程度影响定位精度，但可以有效的降低定位耗电
-									<a href="http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/unzip/Android_Location_Doc/index.html">高德地图 setWifiScan 文档</a></p>
+									默认值为true，当设置为false时会停止主动调用WIFI刷新，将会极大程度影响定位精度，但可以有效的降低定位耗电</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>platform</dt>
@@ -504,7 +540,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L136">index.d.ts:136</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L136">index.d.ts:136</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -526,7 +562,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/33c2583/index.d.ts#L140">index.d.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/e6f0505/index.d.ts#L140">index.d.ts:140</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -570,6 +606,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#setdesiredaccuracy" class="tsd-kind-icon">set<wbr>Desired<wbr>Accuracy</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#setgeolanguage" class="tsd-kind-icon">set<wbr>Geo<wbr>Language</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#setinterval" class="tsd-kind-icon">set<wbr>Interval</a>
