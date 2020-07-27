@@ -193,14 +193,22 @@ export function setLocationMode(mode: 1 | 2 | 3): void;
  * @default false
  * @platform android
  */
-export function setOnceLocation(isOnceLocation): void;
+export function setOnceLocation(isOnceLocation: boolean): void;
+/**
+ * 设置是否使用设备传感器。是否开启设备传感器，当设置为true时，网络定位可以返回海拔、角度和速度。
+ * [高德地图 setSensorEnable 文档](http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/unzip/Android_Location_Doc/index.html)
+ * @default false
+ * @platform android
+ */
+export function setSensorEnable(sensorEnable: boolean): void;
 /**
  * 设置是否允许调用 WIFI 刷新。
  * 默认值为true，当设置为false时会停止主动调用WIFI刷新，将会极大程度影响定位精度，但可以有效的降低定位耗电
+ * [高德地图 setWifiScan 文档](http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/unzip/Android_Location_Doc/index.html)
  * @platform android
  * @default true
  */
-export function setWifiScan(isOnceLocation): void;
+export function setWifiScan(isOnceLocation: boolean): void;
 /**
  * 连续定位监听事件
  * @param {Function} listener 

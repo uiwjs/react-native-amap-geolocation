@@ -187,6 +187,16 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
         option.setWifiScan(isWifiPassiveScan);
         client.setLocationOption(option);
     }
+
+    @ReactMethod
+    public void setSensorEnable(boolean sensorEnable) {
+        if (client == null) {
+            return;
+        }
+        option.setSensorEnable(sensorEnable);
+        client.setLocationOption(option);
+    }
+
     private DeviceEventManagerModule.RCTDeviceEventEmitter getDeviceEventEmitter() {
         if (eventEmitter == null) {
             eventEmitter = reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
