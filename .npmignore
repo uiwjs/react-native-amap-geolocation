@@ -7,6 +7,7 @@ renovate.json
 
 # Example
 example/
+imgs/
 
 # Android
 android/*/build/
@@ -56,8 +57,6 @@ npm-debug.log
 .Trashes
 ehthumbs.db
 Thumbs.dbandroid/gradle
-docs
+typedoc
 .idea
-bin/test.js
 codorials
-website/
