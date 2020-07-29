@@ -31,6 +31,16 @@ D. 按照上面步骤正确设置你的 `apiKey` 才会起作用。
 </details>
 
 <details>
+<summary>Android：无法获取逆地理信息的问题，KEY鉴权失败</summary>
+
+1. APK 当前签名文件的 SHA1 与[高德开放平台](https://console.amap.com/)中设置不一致
+2. Android Studio 开发者请注意调整 `build.gradle` 文件的 `applicationId` 与 `packageName` 一致，如不一致将会导致鉴权失败。
+3. 工程中的 `packageName` 与[高德开放平台](https://console.amap.com/)中 `packageName` 设置不一致
+4. 通过 `SDK` 提供的 `setApiKey(String key);` 接口设置 `Key`，注意 `Key` 设置要在 `SDK` 业务初始化之前。
+
+</details>
+
+<details>
 <summary>iOS：获取逆地理信息需要高德地图配置 apiKey</summary>
 
 <img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/amapkey.png" />
@@ -178,6 +188,16 @@ nehelper sent invalid result code [1] for Wi-Fi information request
 
 ```bash
 npx create-react-native-module --package-identifier com.uiwjs.react.geolocation --object-class-name RNAMapGeolocation --generate-example AMapGeolocation --example-react-native-version 0.63.0 --module-name @uiw/react-native-amap-geolocation --github-account uiwjs --author-name "Kenny Wong" --author-email "wowohoo@qq.com"
+```
+
+## 开发
+
+```bash
+cd example   # 进入实例 example 工程，根目录不需要安装，会引发错误
+yarn install # 安装依赖
+
+cd ios     # 进入 example/ios 目录安装依赖
+pod instll # 安装依赖
 ```
 
 ## 相关连接 

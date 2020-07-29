@@ -2,7 +2,7 @@
   "name": "@uiw/react-native-amap-geolocation",
   "title": "React Native Amap Geolocation",
   "version": "1.2.2",
-  "description": "React Native 高德地图定位模块，支持 Android/iOS",
+  "description": "React Native 高德地图定位原生，支持 Android/iOS",
   "main": "index.js",
   "typings": "index.d.ts",
   "files": [
