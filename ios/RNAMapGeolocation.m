@@ -115,6 +115,14 @@ RCT_EXPORT_METHOD(setLocatingWithReGeocode: (BOOL)value) {
     [_manager setLocatingWithReGeocode: value];
 }
 
+// 逆地址语言类型，默认是AMapLocationRegionLanguageDefault
+// AMapLocationReGeocodeLanguageDefault = 0,          ///<默认，根据地区选择语言
+// AMapLocationReGeocodeLanguageChinse = 1,           ///<中文
+// AMapLocationReGeocodeLanguageEnglish = 2,          ///<英文
+RCT_EXPORT_METHOD(setGeoLanguage : (int)value) {
+  _manager.reGeocodeLanguage = (AMapLocationReGeocodeLanguage)value;
+}
+
 /**
  * @brief 转换目标经纬度为高德坐标系，不在枚举范围内的经纬度将直接返回。
  * @param coordinate 待转换的经纬度

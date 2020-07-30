@@ -194,6 +194,16 @@ export function setInterval(interval: number): void;
  */
 export function setDistanceFilter(time: number): void;
 /**
+ * 定位超时时间，最低2s
+ * @platform ios
+ */
+export function setLocationTimeout(number: number): void;
+/**
+ * 逆地理请求超时时间，最低 2s，默认为2s 注意在单次定位请求前设置。
+ * @platform ios
+ */
+export function setReGeocodeTimeout(number: number): void;
+/**
  * 获取当前定位
  * 默认只获取经纬度，`iOS` 通过 {@linkcode setLocatingWithReGeocode}  设置，是否返回逆地理信息
  */
@@ -238,7 +248,6 @@ export function setSensorEnable(sensorEnable: boolean): void;
 export function setWifiScan(isOnceLocation: boolean): void;
 /**
  * 设置逆地理信息的语言，目前之中中文和英文。
- * @platform android
  * @default DEFAULT
  */
 export function setGeoLanguage(language: 'DEFAULT' | 'EN' | 'ZH'): void;

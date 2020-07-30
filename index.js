@@ -29,18 +29,24 @@ export default class AMapGeolocation {
     return NativeModules.RNAMapGeolocation.isStarted();
   }
   /**
-   * 定位超时时间，最低2s
+   * 定位超时时间，最低 2s
    * @param {number} number 默认设置为2s
+   * @platform ios
    */
   static setLocationTimeout(number = 2) {
-    return NativeModules.RNAMapGeolocation.setLocationTimeout(number);
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setLocationTimeout(number);
+    }
   }
   /**
    * 逆地理请求超时时间，最低2s
    * @param {number} number 默认设置为2s
+   * @platform ios
    */
   static setReGeocodeTimeout(number = 2) {
-    return NativeModules.RNAMapGeolocation.setReGeocodeTimeout(number);
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setReGeocodeTimeout(number);
+    }
   }
   /**
    * 坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标
@@ -177,12 +183,22 @@ export default class AMapGeolocation {
 
   /**
    * 设置逆地理信息的语言，目前之中中文和英文。
-   * @default DEFAULT
-   * @platform android
+   * @param {DEFAULT | EN | ZH} language
+   * @default DEFAULT 
    */
   static setGeoLanguage(language = 'DEFAULT') {
     if (Platform.OS === "android") {
       return NativeModules.RNAMapGeolocation.setGeoLanguage(language);
+    }
+    if (Platform.OS === "ios") {
+      let value = 0;
+      switch (language) {
+        case 'DEFAULT': value = 0; break;
+        case 'ZH': value = 1; break;
+        case 'EN': value = 2; break;
+        default: break;
+      }
+      return NativeModules.RNAMapGeolocation.setGeoLanguage(value);
     }
   }
 
