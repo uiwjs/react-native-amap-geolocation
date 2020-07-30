@@ -178,6 +178,18 @@ const resulte = await AMapGeolocation.coordinateConvert({
 // => {longitude: 116.46071927031961, latitude: 39.99651501274128}
 ```
 
+## 定位回调频率限制
+
+```js
+import AMapGeolocation from '@uiw/react-native-amap-geolocation';
+
+// android，5 秒请求一次定位
+AMapGeolocation.setInterval(5000);
+
+// ios，设备移动超过 10 米才会更新位置信息
+AMapGeolocation.setDistanceFilter(10);
+```
+
 ## 错误处理
 
 ```bash

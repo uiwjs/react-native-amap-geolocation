@@ -53,6 +53,11 @@ RCT_EXPORT_METHOD(setLocationTimeout: (int)value) {
 RCT_EXPORT_METHOD(setReGeocodeTimeout: (int)value) {
     _manager.reGeocodeTimeout = value;
 }
+
+// 设定定位的最小更新距离。单位米，默认为 kCLDistanceFilterNone，表示只要检测到设备位置发生变化就会更新位置信息。
+RCT_EXPORT_METHOD(setDistanceFilter : (int)value) {
+  _manager.distanceFilter = value;
+}
 // 用于指定所需的精度级别。 定位服务将尽最大努力达到您想要的精度。 但是，不能保证。
 // 为了优化电源性能，请确保为您的使用情况指定适当的精度（例如，当仅需要粗略位置时，使用较大的精度值）。
 // 0 => kCLLocationAccuracyBestForNavigation

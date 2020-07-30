@@ -132,7 +132,16 @@ export default class AMapGeolocation {
       return NativeModules.RNAMapGeolocation.setNeedAddress(isReGeocode);
     }
   }
-
+  /**
+   * 设定定位的最小更新距离。单位米，默认，表示只要检测到设备位置发生变化就会更新位置信息。
+   * @param {number} time 
+   * @platform ios
+   */
+  static setDistanceFilter(time) {
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setDistanceFilter(time);
+    }
+  }
   /**
    * 设置发起定位请求的时间间隔，单位：毫秒，默认值：2000毫秒
    * @platform android

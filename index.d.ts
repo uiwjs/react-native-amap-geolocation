@@ -189,6 +189,11 @@ export function coordinateConvert(coordinate: Point, type: -1 | 0 | 1 | 2 | 3 | 
  */
 export function setInterval(interval: number): void;
 /**
+ * 设定定位的最小更新距离。单位米，默认，表示只要检测到设备位置发生变化就会更新位置信息。
+ * @platform ios
+ */
+export function setDistanceFilter(time: number): void;
+/**
  * 获取当前定位
  * 默认只获取经纬度，`iOS` 通过 {@linkcode setLocatingWithReGeocode}  设置，是否返回逆地理信息
  */
