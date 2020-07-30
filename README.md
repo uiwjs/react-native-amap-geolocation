@@ -2,6 +2,7 @@
 ----
 
 [![NPM Version](https://img.shields.io/npm/v/@uiw/react-native-amap-geolocation.svg)](https://npmjs.org/package/@uiw/react-native-amap-geolocation)
+![David](https://img.shields.io/david/peer/uiwjs/react-native-amap-geolocation)
 
 React Native 高德地图定位模块，支持 Android/iOS。[完整的接口文档](https://uiwjs.github.io/react-native-amap-geolocation/)
 

@@ -29,9 +29,23 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
     public RNAMapGeolocationModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+    }
+
+    @ReactMethod
+    public void setApiKey(String key) {
         if (client != null) {
-            client.onDestroy();
+            client = null
         }
+        // 通过SDK提供的 `setApiKey(String key);` 接口设置Key，注意Key设置要在SDK业务初始化之前。
+        // 需要在初始化的额前面设置 key
+        AMapLocationClient.setApiKey(key);
+        // 初始化定位
+        client = new AMapLocationClient(reactContext.getApplicationContext());
+        //设置定位参数
+        client.setLocationOption(option);
+        // 设置定位监听
+        client.setLocationListener(locationListener);
+        // client.startLocation();
     }
 
     @Override
@@ -47,6 +61,7 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
             }
             // System.out.println(mLastAMapLocation);
             promise.resolve(toJSON(mLastAMapLocation));
+            client.stopLocation();
         } catch (Exception e) {
             promise.resolve(null);
         }
@@ -60,24 +75,6 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
         }
         AMapLocation location = client.getLastKnownLocation();
         promise.resolve(toJSON(location));
-    }
-
-    @ReactMethod
-    public void setApiKey(String key) {
-        if (client != null) {
-            client.onDestroy();
-        }
-        // 需要在初始化的额前面设置 key
-        AMapLocationClient.setApiKey(key);
-        if (client == null) {
-            // 初始化定位
-            client = new AMapLocationClient(reactContext.getApplicationContext());
-            //设置定位参数
-            client.setLocationOption(option);
-            // 设置定位监听
-            client.setLocationListener(locationListener);
-            client.startLocation();
-        }
     }
 
     @ReactMethod

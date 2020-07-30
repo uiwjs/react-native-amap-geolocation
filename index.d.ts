@@ -1,8 +1,7 @@
 /**
- * 坐标信息
- * @see https://developer.mozilla.org/zh-CN/docs/Web/API/Coordinates
+ * 一个地理坐标点。
  */
-export interface Coordinates {
+export interface Point {
   /**
    * 纬度
    */
@@ -11,6 +10,13 @@ export interface Coordinates {
    * 经度
    */
   longitude: number;
+}
+
+/**
+ * 坐标信息
+ * @see https://developer.mozilla.org/zh-CN/docs/Web/API/Coordinates
+ */
+export interface Coordinates extends Point {
   /**
    * 高度 - 海拔高度，以米为单位。
    */
@@ -161,6 +167,22 @@ export function isStarted(): Promise<Boolean>;
  */
 export function setDesiredAccuracy(accuracy: 0 | 1 | 2 | 3 | 4 | 5): void;
 /**
+ * 坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标
+ * 
+ * - -1 -> `AMapCoordinateTypeAMap`     // <AMap
+ * - 0 -> `AMapCoordinateTypeBaidu`     // <Baidu
+ * - 1 -> `AMapCoordinateTypeMapBar`    // <MapBar
+ * - 2 -> `AMapCoordinateTypeMapABC`    // <MapABC
+ * - 3 -> `AMapCoordinateTypeSoSoMap`   // <SoSoMap
+ * - 4 -> `AMapCoordinateTypeAliYun`    // <AliYun
+ * - 5 -> `AMapCoordinateTypeGoogle`    // <Google
+ * - 6 -> `AMapCoordinateTypeGPS`       // <GPS
+ * @param {latitude: number, longitude: number} coordinate 待转换的经纬度
+ * @param {Number} type 坐标系类型，对应的序号
+ * 如：coordinate = { latitude: 40.002172, longitude: 116.467357 }
+ */
+export function coordinateConvert(coordinate: Point, type: -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6): Promise<Point>;
+/**
  * 设置发起定位请求的时间间隔，单位：毫秒，默认值：2000毫秒
  * @platform android
  * @default 2000
@@ -187,6 +209,7 @@ export function setLocatingWithReGeocode(isReGeocode: boolean): void;
  * - 3 => `Device_Sensors` 仅设备定位模式：在这种模式下，将只使用卫星定位。
  * @param {number} mode `1~3`
  * @platform android
+ * @default 1
  */
 export function setLocationMode(mode: 1 | 2 | 3): void;
 /**

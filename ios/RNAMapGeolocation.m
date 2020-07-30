@@ -110,6 +110,57 @@ RCT_EXPORT_METHOD(setLocatingWithReGeocode: (BOOL)value) {
     [_manager setLocatingWithReGeocode: value];
 }
 
+/**
+ * @brief 转换目标经纬度为高德坐标系，不在枚举范围内的经纬度将直接返回。
+ * @param coordinate 待转换的经纬度
+ * @param typeNum    坐标系类型，对应的序号
+ * @return 高德坐标系经纬度
+ * https://lbs.amap.com/api/ios-sdk/guide/computing-equipment/amap-calculate-tool
+ */
+RCT_EXPORT_METHOD(coordinateConvert:
+                  (CLLocationCoordinate2D) coordinate
+      typer:(NSInteger)typeNum
+      resolver: (RCTPromiseResolveBlock)resolve
+      rejecter:(RCTPromiseRejectBlock)reject)
+{
+    AMapCoordinateType typeObj;
+    switch (typeNum) {
+        case -1:
+            typeObj = AMapCoordinateTypeAMap;
+            break;
+        case 0:
+            typeObj = AMapCoordinateTypeBaidu;
+            break;
+        case 1:
+            typeObj = AMapCoordinateTypeMapBar;
+            break;
+        case 2:
+            typeObj = AMapCoordinateTypeMapABC;
+            break;
+        case 3:
+            typeObj = AMapCoordinateTypeSoSoMap;
+            break;
+        case 4:
+            typeObj = AMapCoordinateTypeAliYun;
+            break;
+        case 5:
+            typeObj = AMapCoordinateTypeGoogle;
+            break;
+        case 6:
+            typeObj = AMapCoordinateTypeGPS;
+            break;
+        default:
+            typeObj = AMapCoordinateTypeGPS;
+            break;
+    }
+    
+    CLLocationCoordinate2D amapcoord = AMapCoordinateConvert(CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), typeObj);
+    resolve(@{
+        @"latitude": [NSNumber numberWithDouble:amapcoord.latitude],
+        @"longitude": [NSNumber numberWithDouble:amapcoord.longitude]
+    });
+}
+
 // 获取当前定位
 // 默认只获取经纬度，通过 setLocatingWithReGeocode 设置，是否返回逆地理信息
 RCT_EXPORT_METHOD(getCurrentLocation: (RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {

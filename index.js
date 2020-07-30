@@ -43,6 +43,24 @@ export default class AMapGeolocation {
     return NativeModules.RNAMapGeolocation.setReGeocodeTimeout(number);
   }
   /**
+   * 坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标
+   * 
+   * - -1 -> `AMapCoordinateTypeAMap`     ///<AMap
+   * - 0 -> `AMapCoordinateTypeBaidu`     ///<Baidu
+   * - 1 -> `AMapCoordinateTypeMapBar`    ///<MapBar
+   * - 2 -> `AMapCoordinateTypeMapABC`    ///<MapABC
+   * - 3 -> `AMapCoordinateTypeSoSoMap`   ///<SoSoMap
+   * - 4 -> `AMapCoordinateTypeAliYun`    ///<AliYun
+   * - 5 -> `AMapCoordinateTypeGoogle`    ///<Google
+   * - 6 -> `AMapCoordinateTypeGPS`       ///<GPS
+   * @param {Object} coordinate 待转换的经纬度
+   * @param {Number} type 坐标系类型，对应的序号
+   * 如：39.989612,116.480972
+   */
+  static coordinateConvert(coordinate, type) {
+    return NativeModules.RNAMapGeolocation.coordinateConvert(coordinate, type);
+  }
+  /**
    * 用于指定所需的精度级别。
    * 单位米，默认为 kCLLocationAccuracyBest。定位服务会尽可能去获取满足desiredAccuracy的定位结果，但不保证一定会得到满足期望的结果。
    * 注意：设置为 kCLLocationAccuracyBest 或 kCLLocationAccuracyBestForNavigation 时，
