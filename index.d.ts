@@ -194,6 +194,12 @@ export function setInterval(interval: number): void;
  */
 export function setPausesLocationUpdatesAutomatically(value: boolean = false): void;
 /**
+ * 是否允许后台定位。默认为NO。只在iOS 9.0及之后起作用。
+ * 设置为YES的时候必须保证 Background Modes 中的 Location updates 处于选中状态，否则会抛出异常。
+ * @platform ios
+ */
+export function setAllowsBackgroundLocationUpdates(value: boolean = false): void;
+/**
  * 设定定位的最小更新距离。单位米，默认，表示只要检测到设备位置发生变化就会更新位置信息。
  * @platform ios
  */

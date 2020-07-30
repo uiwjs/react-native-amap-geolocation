@@ -158,6 +158,16 @@ export default class AMapGeolocation {
     }
   }
   /**
+   * 是否允许后台定位。默认为NO。只在iOS 9.0及之后起作用。
+   * 设置为YES的时候必须保证 Background Modes 中的 Location updates 处于选中状态，否则会抛出异常。
+   * @platform ios
+   */
+  static setAllowsBackgroundLocationUpdates(value = false) {
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setAllowsBackgroundLocationUpdates(value);
+    }
+  }
+  /**
    * 设置发起定位请求的时间间隔，单位：毫秒，默认值：2000毫秒
    * @platform android
    */

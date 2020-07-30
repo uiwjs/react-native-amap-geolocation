@@ -29,8 +29,6 @@ RCT_EXPORT_MODULE()
         [_manager setDesiredAccuracy: kCLLocationAccuracyHundredMeters];
         // 设置不允许系统暂停定位
         [_manager setPausesLocationUpdatesAutomatically: NO];
-        // 设置允许在后台定位
-        [_manager setAllowsBackgroundLocationUpdates: YES];
         
         [[AMapServices sharedServices] setEnableHTTPS:YES];
 
@@ -126,6 +124,11 @@ RCT_EXPORT_METHOD(setGeoLanguage : (int)value) {
 // 指定定位是否会被系统自动暂停。默认为NO。
 RCT_EXPORT_METHOD(setPausesLocationUpdatesAutomatically: (BOOL)value) {
   _manager.pausesLocationUpdatesAutomatically = value;
+}
+// 是否允许后台定位。默认为NO。只在iOS 9.0及之后起作用。
+// 设置为YES的时候必须保证 Background Modes 中的 Location updates 处于选中状态，否则会抛出异常。
+RCT_EXPORT_METHOD(setAllowsBackgroundLocationUpdates: (BOOL)value) {
+  _manager.allowsBackgroundLocationUpdates = value;
 }
 
 /**
