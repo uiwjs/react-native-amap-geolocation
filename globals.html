@@ -69,6 +69,7 @@
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-interface"><a href="interfaces/coordinates.html" class="tsd-kind-icon">Coordinates</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/point.html" class="tsd-kind-icon">Point</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/regeocode.html" class="tsd-kind-icon">Re<wbr>Geocode</a></li>
 							</ul>
 						</section>
@@ -76,6 +77,7 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function"><a href="globals.html#addlocationlistener" class="tsd-kind-icon">add<wbr>Location<wbr>Listener</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#coordinateconvert" class="tsd-kind-icon">coordinate<wbr>Convert</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#getcurrentlocation" class="tsd-kind-icon">get<wbr>Current<wbr>Location</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#isstarted" class="tsd-kind-icon">is<wbr>Started</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#setapikey" class="tsd-kind-icon">set<wbr>Api<wbr>Key</a></li>
@@ -106,7 +108,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L221">index.d.ts:221</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L244">index.d.ts:244</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -145,6 +147,54 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="coordinateconvert" class="tsd-anchor"></a>
+					<h3>coordinate<wbr>Convert</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">coordinate<wbr>Convert<span class="tsd-signature-symbol">(</span>coordinate<span class="tsd-signature-symbol">: </span><a href="interfaces/point.html" class="tsd-signature-type">Point</a>, type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">-1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">6</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/point.html" class="tsd-signature-type">Point</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L184">index.d.ts:184</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标</p>
+								</div>
+								<ul>
+									<li>-1 -&gt; <code>AMapCoordinateTypeAMap</code>     // &lt;AMap</li>
+									<li>0 -&gt; <code>AMapCoordinateTypeBaidu</code>     // &lt;Baidu</li>
+									<li>1 -&gt; <code>AMapCoordinateTypeMapBar</code>    // &lt;MapBar</li>
+									<li>2 -&gt; <code>AMapCoordinateTypeMapABC</code>    // &lt;MapABC</li>
+									<li>3 -&gt; <code>AMapCoordinateTypeSoSoMap</code>   // &lt;SoSoMap</li>
+									<li>4 -&gt; <code>AMapCoordinateTypeAliYun</code>    // &lt;AliYun</li>
+									<li>5 -&gt; <code>AMapCoordinateTypeGoogle</code>    // &lt;Google</li>
+									<li>6 -&gt; <code>AMapCoordinateTypeGPS</code>       // &lt;GPS</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>coordinate: <a href="interfaces/point.html" class="tsd-signature-type">Point</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>待转换的经纬度</p>
+									</div>
+								</li>
+								<li>
+									<h5>type: <span class="tsd-signature-type">-1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">6</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>坐标系类型，对应的序号
+										如：coordinate = { latitude: 40.002172, longitude: 116.467357 }</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/point.html" class="tsd-signature-type">Point</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="getcurrentlocation" class="tsd-anchor"></a>
 					<h3>get<wbr>Current<wbr>Location</h3>
 					<ul class="tsd-signatures tsd-kind-function">
@@ -154,7 +204,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L173">index.d.ts:173</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L195">index.d.ts:195</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -177,7 +227,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L143">index.d.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L149">index.d.ts:149</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -199,7 +249,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L131">index.d.ts:131</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L137">index.d.ts:137</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -235,7 +285,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L162">index.d.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L168">index.d.ts:168</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -285,7 +335,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L216">index.d.ts:216</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L239">index.d.ts:239</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -321,7 +371,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L168">index.d.ts:168</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L190">index.d.ts:190</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -357,7 +407,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L180">index.d.ts:180</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L202">index.d.ts:202</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -396,7 +446,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L191">index.d.ts:191</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L214">index.d.ts:214</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -413,6 +463,9 @@
 								<dl class="tsd-comment-tags">
 									<dt>platform</dt>
 									<dd><p>android</p>
+									</dd>
+									<dt>default</dt>
+									<dd><p>1</p>
 									</dd>
 								</dl>
 							</div>
@@ -439,7 +492,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L197">index.d.ts:197</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L220">index.d.ts:220</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -475,7 +528,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L203">index.d.ts:203</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L226">index.d.ts:226</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -511,7 +564,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L210">index.d.ts:210</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L233">index.d.ts:233</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -548,7 +601,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L135">index.d.ts:135</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L141">index.d.ts:141</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -570,7 +623,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/8c6ec8f/index.d.ts#L139">index.d.ts:139</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/1d3dbb9/index.d.ts#L145">index.d.ts:145</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -598,10 +651,16 @@
 						<a href="interfaces/coordinates.html" class="tsd-kind-icon">Coordinates</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/point.html" class="tsd-kind-icon">Point</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/regeocode.html" class="tsd-kind-icon">Re<wbr>Geocode</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#addlocationlistener" class="tsd-kind-icon">add<wbr>Location<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#coordinateconvert" class="tsd-kind-icon">coordinate<wbr>Convert</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#getcurrentlocation" class="tsd-kind-icon">get<wbr>Current<wbr>Location</a>
