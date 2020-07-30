@@ -199,6 +199,16 @@ AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>)
   <span class="hljs-attr">longitude</span>: <span class="hljs-number">116.467357</span>,
 }, <span class="hljs-number">0</span>);
 <span class="hljs-comment">// =&gt; {longitude: 116.46071927031961, latitude: 39.99651501274128}</span></code></pre>
+				<a href="#定位回调频率限制" id="定位回调频率限制" style="color: inherit; text-decoration: none;">
+					<h2>定位回调频率限制</h2>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> AMapGeolocation <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@uiw/react-native-amap-geolocation&#x27;</span>;
+
+<span class="hljs-comment">// android，5 秒请求一次定位</span>
+AMapGeolocation.setInterval(<span class="hljs-number">5000</span>);
+
+<span class="hljs-comment">// ios，设备移动超过 10 米才会更新位置信息</span>
+AMapGeolocation.setDistanceFilter(<span class="hljs-number">10</span>);</code></pre>
 				<a href="#错误处理" id="错误处理" style="color: inherit; text-decoration: none;">
 					<h2>错误处理</h2>
 				</a>
@@ -275,6 +285,9 @@ pod instll <span class="hljs-comment"># 安装依赖</span></code></pre>
 						<a href="globals.html#setdesiredaccuracy" class="tsd-kind-icon">set<wbr>Desired<wbr>Accuracy</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="globals.html#setdistancefilter" class="tsd-kind-icon">set<wbr>Distance<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="globals.html#setgeolanguage" class="tsd-kind-icon">set<wbr>Geo<wbr>Language</a>
 					</li>
 					<li class=" tsd-kind-function">
@@ -287,7 +300,13 @@ pod instll <span class="hljs-comment"># 安装依赖</span></code></pre>
 						<a href="globals.html#setlocationmode" class="tsd-kind-icon">set<wbr>Location<wbr>Mode</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="globals.html#setlocationtimeout" class="tsd-kind-icon">set<wbr>Location<wbr>Timeout</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="globals.html#setoncelocation" class="tsd-kind-icon">set<wbr>Once<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#setregeocodetimeout" class="tsd-kind-icon">set<wbr>ReGeocode<wbr>Timeout</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#setsensorenable" class="tsd-kind-icon">set<wbr>Sensor<wbr>Enable</a>
