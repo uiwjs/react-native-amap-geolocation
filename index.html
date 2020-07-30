@@ -187,6 +187,18 @@ AMapGeolocation.addLocationListener(<span class="hljs-function">(<span class="hl
 AMapGeolocation.setApiKey(apiKey);
 <span class="hljs-comment">// 定位是否返回逆地理信息</span>
 AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>);</code></pre>
+				<a href="#坐标转换" id="坐标转换" style="color: inherit; text-decoration: none;">
+					<h2>坐标转换</h2>
+				</a>
+				<p>坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标</p>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> AMapGeolocation <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@uiw/react-native-amap-geolocation&#x27;</span>;
+
+<span class="hljs-comment">// 将百度地图转换为 高德地图 经纬度</span>
+<span class="hljs-keyword">const</span> resulte = <span class="hljs-keyword">await</span> AMapGeolocation.coordinateConvert({
+  <span class="hljs-attr">latitude</span>: <span class="hljs-number">40.002172</span>,
+  <span class="hljs-attr">longitude</span>: <span class="hljs-number">116.467357</span>,
+}, <span class="hljs-number">0</span>);
+<span class="hljs-comment">// =&gt; {longitude: 116.46071927031961, latitude: 39.99651501274128}</span></code></pre>
 				<a href="#错误处理" id="错误处理" style="color: inherit; text-decoration: none;">
 					<h2>错误处理</h2>
 				</a>
