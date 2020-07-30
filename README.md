@@ -120,7 +120,6 @@ async function getCurrentLocation(){
 
 ## 定位监听函数
 
-
 ```js
 import AMapGeolocation from '@uiw/react-native-amap-geolocation';
 
@@ -162,6 +161,21 @@ if (Platform.OS === 'android') {
 AMapGeolocation.setApiKey(apiKey);
 // 定位是否返回逆地理信息
 AMapGeolocation.setLocatingWithReGeocode(true);
+```
+
+## 坐标转换
+
+坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标
+
+```js
+import AMapGeolocation from '@uiw/react-native-amap-geolocation';
+
+// 将百度地图转换为 高德地图 经纬度
+const resulte = await AMapGeolocation.coordinateConvert({
+  latitude: 40.002172,
+  longitude: 116.467357,
+}, 0);
+// => {longitude: 116.46071927031961, latitude: 39.99651501274128}
 ```
 
 ## 错误处理
