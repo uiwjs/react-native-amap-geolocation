@@ -80,6 +80,7 @@
 								<li class="tsd-kind-function"><a href="globals.html#coordinateconvert" class="tsd-kind-icon">coordinate<wbr>Convert</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#getcurrentlocation" class="tsd-kind-icon">get<wbr>Current<wbr>Location</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#isstarted" class="tsd-kind-icon">is<wbr>Started</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#setallowsbackgroundlocationupdates" class="tsd-kind-icon">set<wbr>Allows<wbr>Background<wbr>Location<wbr>Updates</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#setapikey" class="tsd-kind-icon">set<wbr>Api<wbr>Key</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#setdesiredaccuracy" class="tsd-kind-icon">set<wbr>Desired<wbr>Accuracy</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#setdistancefilter" class="tsd-kind-icon">set<wbr>Distance<wbr>Filter</a></li>
@@ -112,7 +113,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L263">index.d.ts:263</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L269">index.d.ts:269</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -160,7 +161,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L184">index.d.ts:184</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L184">index.d.ts:184</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -208,7 +209,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L215">index.d.ts:215</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L221">index.d.ts:221</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -231,7 +232,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L149">index.d.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L149">index.d.ts:149</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -240,6 +241,40 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="setallowsbackgroundlocationupdates" class="tsd-anchor"></a>
+					<h3>set<wbr>Allows<wbr>Background<wbr>Location<wbr>Updates</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Allows<wbr>Background<wbr>Location<wbr>Updates<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L201">index.d.ts:201</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>是否允许后台定位。默认为NO。只在iOS 9.0及之后起作用。
+									设置为YES的时候必须保证 Background Modes 中的 Location updates 处于选中状态，否则会抛出异常。</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>platform</dt>
+									<dd><p>ios</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> value: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -253,7 +288,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L137">index.d.ts:137</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L137">index.d.ts:137</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -289,7 +324,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L168">index.d.ts:168</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L168">index.d.ts:168</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -339,7 +374,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L200">index.d.ts:200</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L206">index.d.ts:206</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -372,7 +407,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L258">index.d.ts:258</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L264">index.d.ts:264</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -405,7 +440,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L190">index.d.ts:190</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L190">index.d.ts:190</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -441,7 +476,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L222">index.d.ts:222</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L228">index.d.ts:228</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -480,7 +515,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L234">index.d.ts:234</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L240">index.d.ts:240</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -526,7 +561,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L205">index.d.ts:205</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L211">index.d.ts:211</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -559,7 +594,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L240">index.d.ts:240</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L246">index.d.ts:246</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -595,7 +630,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L195">index.d.ts:195</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L195">index.d.ts:195</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -628,7 +663,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L210">index.d.ts:210</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L216">index.d.ts:216</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -661,7 +696,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L246">index.d.ts:246</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L252">index.d.ts:252</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -697,7 +732,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L253">index.d.ts:253</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L259">index.d.ts:259</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -734,7 +769,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L141">index.d.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L141">index.d.ts:141</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -756,7 +791,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/906048f/index.d.ts#L145">index.d.ts:145</a></li>
+									<li>Defined in <a href="https://github.com/uiwjs/react-native-amap-geolocation/blob/99ded9c/index.d.ts#L145">index.d.ts:145</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -800,6 +835,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#isstarted" class="tsd-kind-icon">is<wbr>Started</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#setallowsbackgroundlocationupdates" class="tsd-kind-icon">set<wbr>Allows<wbr>Background<wbr>Location<wbr>Updates</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#setapikey" class="tsd-kind-icon">set<wbr>Api<wbr>Key</a>
