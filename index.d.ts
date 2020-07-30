@@ -189,6 +189,11 @@ export function coordinateConvert(coordinate: Point, type: -1 | 0 | 1 | 2 | 3 | 
  */
 export function setInterval(interval: number): void;
 /**
+ * 指定定位是否会被系统自动暂停。默认为 false
+ * @platform ios
+ */
+export function setPausesLocationUpdatesAutomatically(value: boolean = false): void;
+/**
  * 设定定位的最小更新距离。单位米，默认，表示只要检测到设备位置发生变化就会更新位置信息。
  * @platform ios
  */

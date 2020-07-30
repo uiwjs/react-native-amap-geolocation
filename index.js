@@ -149,6 +149,15 @@ export default class AMapGeolocation {
     }
   }
   /**
+   * 指定定位是否会被系统自动暂停。默认为 false
+   * @platform ios
+   */
+  static setPausesLocationUpdatesAutomatically(value = false) {
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setPausesLocationUpdatesAutomatically(value);
+    }
+  }
+  /**
    * 设置发起定位请求的时间间隔，单位：毫秒，默认值：2000毫秒
    * @platform android
    */

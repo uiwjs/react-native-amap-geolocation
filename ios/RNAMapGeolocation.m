@@ -123,6 +123,11 @@ RCT_EXPORT_METHOD(setGeoLanguage : (int)value) {
   _manager.reGeocodeLanguage = (AMapLocationReGeocodeLanguage)value;
 }
 
+// 指定定位是否会被系统自动暂停。默认为NO。
+RCT_EXPORT_METHOD(setPausesLocationUpdatesAutomatically: (BOOL)value) {
+  _manager.pausesLocationUpdatesAutomatically = value;
+}
+
 /**
  * @brief 转换目标经纬度为高德坐标系，不在枚举范围内的经纬度将直接返回。
  * @param coordinate 待转换的经纬度
