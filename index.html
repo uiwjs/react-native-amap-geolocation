@@ -107,6 +107,10 @@
 				<details>
 					<summary>iOS：需要保证"Background Modes"中的"Location updates"处于选中状态</summary>
 					<img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/xcode.png" />
+					<ol>
+						<li>左侧目录中选中工程名，开启 <code>TARGETS</code> -&gt; <code>Capabilities</code> -&gt; <code>Background Modes</code></li>
+						<li>在 <code>Background Modes</code> 中勾选 <code>Location updates</code></li>
+					</ol>
 				</details>
 				<a href="#安装依赖" id="安装依赖" style="color: inherit; text-decoration: none;">
 					<h2>安装依赖</h2>
@@ -216,13 +220,6 @@ AMapGeolocation.setDistanceFilter(<span class="hljs-number">10</span>);</code></
 				<p>在 <code>Product</code> -&gt; <code>Scheme</code> -&gt; <code>Edit Scheme</code> -&gt; <code>Run</code> -&gt; <code>Arguments</code> -&gt; <code>Environment Variables</code> 添加 <code>OS_ACTIVITY_MODE</code> <code>disable</code></p>
 				<pre><code class="language-bash">nehelper sent invalid result code [1] <span class="hljs-keyword">for</span> Wi-Fi information request</code></pre>
 				<p>配置 WiFi 权限</p>
-				<a href="#ios-配置后台定位" id="ios-配置后台定位" style="color: inherit; text-decoration: none;">
-					<h2>iOS 配置后台定位</h2>
-				</a>
-				<ol>
-					<li>左侧目录中选中工程名，开启 <code>TARGETS</code> -&gt; <code>Capabilities</code> -&gt; <code>Background Modes</code></li>
-					<li>在 <code>Background Modes</code> 中勾选 <code>Location updates</code></li>
-				</ol>
 				<a href="#其它" id="其它" style="color: inherit; text-decoration: none;">
 					<h2>其它</h2>
 				</a>
