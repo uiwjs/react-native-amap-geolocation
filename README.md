@@ -74,6 +74,9 @@ nehelper sent invalid result code [1] for Wi-Fi information request
 
 <img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/xcode.png" />
 
+1. 左侧目录中选中工程名，开启 `TARGETS` -> `Capabilities` -> `Background Modes`
+2. 在 `Background Modes` 中勾选 `Location updates`
+
 </details>
 
 ## 安装依赖
@@ -203,11 +206,6 @@ nehelper sent invalid result code [1] for Wi-Fi information request
 ```
 
 配置 WiFi 权限
-
-## iOS 配置后台定位
-
-1. 左侧目录中选中工程名，开启 `TARGETS` -> `Capabilities` -> `Background Modes`
-2. 在 `Background Modes` 中勾选 `Location updates`
 
 ## 其它
 
