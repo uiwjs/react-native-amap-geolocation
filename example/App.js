@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button, SafeAreaView, ScrollView  } from 'react-native';
+import { Platform, StyleSheet, Text, View, Button, SafeAreaView, ScrollView } from 'react-native';
 import AMapGeolocation from '@uiw/react-native-amap-geolocation';
 
 export default class App extends Component {
@@ -7,6 +7,7 @@ export default class App extends Component {
     location: '',
     isListener: false,
     isStarted: false,
+    isGps: false
   };
   componentDidMount() {
     let apiKey = ''
@@ -30,7 +31,7 @@ export default class App extends Component {
     AMapGeolocation.addLocationListener((location) => {
       console.log('返回定位信息', location);
       this.setState({
-        location: JSON.stringify(location, null, 2), 
+        location: JSON.stringify(location, null, 2),
       });
     });
   }
@@ -63,6 +64,24 @@ export default class App extends Component {
       }
     })
   }
+  // android是否开启gps优先
+  gpsFirst = () => {
+    if (Platform.OS == 'android') {
+      this.setState({
+        isGps: !this.state.isGps
+      }, () => {
+        console.log('GPS优先', this.state.isGps ? '开启' : '关闭')
+        if (this.state.isGps) {
+          return
+        } else {
+          AMapGeolocation.setGpsFirst(this.state.isGps);
+        }
+      })
+    } else {
+      return
+    }
+  }
+
   coordinateConvert = async () => {
     try {
       // 将百度地图转换为 高德地图 经纬度
@@ -101,6 +120,13 @@ export default class App extends Component {
             title={`${this.state.isListener ? '关闭' : '开启'}连续监听定位`}
             color="#841584"
           />
+          <Button
+            onPress={this.gpsFirst}
+            title="是否开启GPS优先"
+            title={`${this.state.isGps ? '关闭' : '开启'}GPS优先`}
+            color="#841584"
+          />
+
           <ScrollView style={{ flex: 1 }}>
             <Text>
               {this.state.location}

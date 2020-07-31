@@ -223,7 +223,7 @@ export default class AMapGeolocation {
 
   /**
    * 连续定位监听事件
-   * @param {Function} listener 
+   * @param {Function} listener
    */
   static addLocationListener(listener) {
     return eventEmitter.addListener('AMapGeolocation', (info) => {
@@ -236,5 +236,15 @@ export default class AMapGeolocation {
       }
       listener && listener(info, errorInfo);
     });
+  }
+  /**
+  * 设置是否gps优先
+  * @default false
+  * @platform android
+  */
+  static setGpsFirst(isSetGpsFirst) {
+    if (Platform.OS === "android") {
+      return NativeModules.RNAMapGeolocation.setGpsFirst(isSetGpsFirst);
+    }
   }
 }

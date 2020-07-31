@@ -130,7 +130,7 @@ export interface ReGeocode extends Coordinates {
  * -
  * - [高德获取 iOS key 文档地址](https://lbs.amap.com/api/ios-location-sdk/guide/create-project/get-key)
  * - [高德获取 Android key 文档地址](https://lbs.amap.com/api/android-location-sdk/guide/create-project/get-key)
- * 
+ *
  * 注意：安卓设置 key 很重要，由于在 android 平台必须优先设置 ApiKey 才能初始化 地图实例。
  * 所以这个方法在android 平台下，还附带了初始化地图实例。
  */
@@ -149,13 +149,13 @@ export function stop(): void;
 export function isStarted(): Promise<Boolean>;
 /**
  * 用于指定所需的精度级别。
- * 单位米，默认为 kCLLocationAccuracyBest。定位服务会尽可能去获取满足desiredAccuracy的定位结果，但不保证一定会得到满足期望的结果。  
+ * 单位米，默认为 kCLLocationAccuracyBest。定位服务会尽可能去获取满足desiredAccuracy的定位结果，但不保证一定会得到满足期望的结果。
  * 注意：设置为 kCLLocationAccuracyBest 或 kCLLocationAccuracyBestForNavigation 时，
- * 单次定位会在达到 locationTimeout 设定的时间后，将时间内获取到的最高精度的定位结果返回。  
+ * 单次定位会在达到 locationTimeout 设定的时间后，将时间内获取到的最高精度的定位结果返回。
  * 高德提供了 kCLLocationAccuracyBest 参数，设置该参数可以获取到精度在10m 左右的定位结果，但是相应的需要付出比较长的时间（10s左右），
- * 越高的精度需要持续定位时间越长。  
+ * 越高的精度需要持续定位时间越长。
  * 推荐：kCLLocationAccuracyHundredMeters，一次还不错的定位，偏差在百米左右，超时时间设置在2s-3s左右即可。
- * 
+ *
  * @param {number} accuracy 1
  * - 0 => kCLLocationAccuracyBestForNavigation
  * - 1 => kCLLocationAccuracyBest
@@ -264,6 +264,15 @@ export function setWifiScan(isOnceLocation: boolean): void;
 export function setGeoLanguage(language: 'DEFAULT' | 'EN' | 'ZH'): void;
 /**
  * 连续定位监听事件
- * @param {Function} listener 
+ * @param {Function} listener
  */
 export function addLocationListener(listener?: (location: Coordinates | ReGeocode) => void): void;
+
+/**
+ * 设置是否gps优先
+ * 只有在单次定位高精度定位模式下有效
+ * 设置为true时，会等待卫星定位结果返回，最多等待30秒，若30秒后仍无卫星定位结果返回，返回网络定位结果
+ * @default false
+ * @platform android
+ */
+export function setGpsFirst(isSetGpsFirst: boolean): void;

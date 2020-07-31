@@ -125,6 +125,18 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
 	// }
 
     /**
+     * 设置是否gps优先
+     */
+    @ReactMethod
+    public void setGpsFirst(boolean isSetGpsFirst) {
+        if (client == null) {
+            return;
+        }
+        option.setGpsFirst(isSetGpsFirst);
+        client.setLocationOption(option);
+    }
+
+    /**
      * 设置发起定位请求的时间间隔，单位：毫秒，默认值：2000毫秒
      */
     @ReactMethod
