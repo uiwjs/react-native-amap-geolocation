@@ -177,8 +177,8 @@ export function setDesiredAccuracy(accuracy: 0 | 1 | 2 | 3 | 4 | 5): void;
  * - 4 -> `AMapCoordinateTypeAliYun`    // <AliYun
  * - 5 -> `AMapCoordinateTypeGoogle`    // <Google
  * - 6 -> `AMapCoordinateTypeGPS`       // <GPS
- * @param {latitude: number, longitude: number} coordinate 待转换的经纬度
- * @param {Number} type 坐标系类型，对应的序号
+ * @param coordinate 待转换的经纬度
+ * @param type 坐标系类型，对应的序号
  * 如：coordinate = { latitude: 40.002172, longitude: 116.467357 }
  */
 export function coordinateConvert(coordinate: Point, type: -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6): Promise<Point>;

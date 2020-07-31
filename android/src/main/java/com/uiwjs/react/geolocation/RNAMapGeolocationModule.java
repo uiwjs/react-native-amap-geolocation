@@ -7,6 +7,9 @@ import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationClientOption.AMapLocationProtocol;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.AMapLocationQualityReport;
+import com.amap.api.location.CoordinateConverter;
+import com.amap.api.location.CoordinateConverter.CoordType;
+import com.amap.api.location.DPoint;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -15,6 +18,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.bridge.ReadableMap;
 
 public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
 
@@ -34,7 +38,7 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void setApiKey(String key) {
         if (client != null) {
-            client = null
+            client = null;
         }
         // 通过SDK提供的 `setApiKey(String key);` 接口设置Key，注意Key设置要在SDK业务初始化之前。
         // 需要在初始化的额前面设置 key
@@ -181,6 +185,64 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
         }
         option.setNeedAddress(value);
         client.setLocationOption(option);
+    }
+    @ReactMethod
+    public void coordinateConvert(ReadableMap point, int typer, final Promise promise) {
+        if (client == null) {
+            return;
+        }
+        try {
+            // { latitude: 40.002172, longitude: 116.467357 }
+            // 构造一个示例坐标，第一个参数是纬度，第二个参数是经度
+            DPoint pointer = new DPoint(point.getDouble("latitude"), point.getDouble("longitude"));
+            // DPoint pointer = new DPoint(39.911127, 116.433608);
+            // 初始化坐标转换类
+            CoordinateConverter converter = new CoordinateConverter(reactContext.getApplicationContext());
+            /**
+            * 设置坐标来源,这里使用百度坐标作为示例
+            * 可选的来源包括：
+            * - CoordType.BAIDU: 百度坐标
+            * - CoordType.MAPBAR: 图吧坐标
+            * - CoordType.MAPABC: 图盟坐标
+            * - CoordType.SOSOMAP: 搜搜坐标
+            * - CoordType.ALIYUN: 阿里云坐标
+            * - CoordType.GOOGLE: 谷歌坐标
+            * - CoordType.GPS: GPS坐标
+            */
+            switch (typer) {
+                case 0:
+                    converter.from(CoordType.BAIDU);
+                    break;
+                case 1:
+                    converter.from(CoordType.MAPBAR);
+                    break;
+                case 2:
+                    converter.from(CoordType.MAPABC);
+                    break;
+                case 3:
+                    converter.from(CoordType.SOSOMAP);
+                    break;
+                case 4:
+                    converter.from(CoordType.ALIYUN);
+                    break;
+                case 5:
+                    converter.from(CoordType.GOOGLE);
+                    break;
+                case 6:
+                    converter.from(CoordType.GPS);
+                    break;
+                    default: break;
+            }
+            converter.coord(pointer);
+            // 转换成高德坐标
+            DPoint destPoint = converter.convert();
+            WritableMap map = Arguments.createMap();
+            map.putDouble("latitude", destPoint.getLatitude());
+            map.putDouble("longitude", destPoint.getLongitude());
+            promise.resolve(map);
+        } catch (Exception e) {
+            promise.reject("-11", e.getMessage());
+        }
     }
 
     /**
