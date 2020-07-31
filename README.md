@@ -2,6 +2,7 @@
 ----
 
 [![NPM Version](https://img.shields.io/npm/v/@uiw/react-native-amap-geolocation.svg)](https://npmjs.org/package/@uiw/react-native-amap-geolocation)
+![David](https://img.shields.io/david/peer/uiwjs/react-native-amap-geolocation)
 
 React Native 高德地图定位模块，支持 Android/iOS。[完整的接口文档](https://uiwjs.github.io/react-native-amap-geolocation/)
 
@@ -73,6 +74,9 @@ nehelper sent invalid result code [1] for Wi-Fi information request
 
 <img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/xcode.png" />
 
+1. 左侧目录中选中工程名，开启 `TARGETS` -> `Capabilities` -> `Background Modes`
+2. 在 `Background Modes` 中勾选 `Location updates`
+
 </details>
 
 ## 安装依赖
@@ -119,7 +123,6 @@ async function getCurrentLocation(){
 
 ## 定位监听函数
 
-
 ```js
 import AMapGeolocation from '@uiw/react-native-amap-geolocation';
 
@@ -163,6 +166,33 @@ AMapGeolocation.setApiKey(apiKey);
 AMapGeolocation.setLocatingWithReGeocode(true);
 ```
 
+## 坐标转换
+
+坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标
+
+```js
+import AMapGeolocation from '@uiw/react-native-amap-geolocation';
+
+// 将百度地图转换为 高德地图 经纬度
+const resulte = await AMapGeolocation.coordinateConvert({
+  latitude: 40.002172,
+  longitude: 116.467357,
+}, 0);
+// => {longitude: 116.46071927031961, latitude: 39.99651501274128}
+```
+
+## 定位回调频率限制
+
+```js
+import AMapGeolocation from '@uiw/react-native-amap-geolocation';
+
+// android，5 秒请求一次定位
+AMapGeolocation.setInterval(5000);
+
+// ios，设备移动超过 10 米才会更新位置信息
+AMapGeolocation.setDistanceFilter(10);
+```
+
 ## 错误处理
 
 ```bash
@@ -176,11 +206,6 @@ nehelper sent invalid result code [1] for Wi-Fi information request
 ```
 
 配置 WiFi 权限
-
-## iOS 配置后台定位
-
-1. 左侧目录中选中工程名，开启 `TARGETS` -> `Capabilities` -> `Background Modes`
-2. 在 `Background Modes` 中勾选 `Location updates`
 
 ## 其它
 

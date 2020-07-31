@@ -29,8 +29,6 @@ RCT_EXPORT_MODULE()
         [_manager setDesiredAccuracy: kCLLocationAccuracyHundredMeters];
         // 设置不允许系统暂停定位
         [_manager setPausesLocationUpdatesAutomatically: NO];
-        // 设置允许在后台定位
-        [_manager setAllowsBackgroundLocationUpdates: YES];
         
         [[AMapServices sharedServices] setEnableHTTPS:YES];
 
@@ -52,6 +50,11 @@ RCT_EXPORT_METHOD(setLocationTimeout: (int)value) {
 // 逆地理请求超时时间，最低2s，默认设置为2s
 RCT_EXPORT_METHOD(setReGeocodeTimeout: (int)value) {
     _manager.reGeocodeTimeout = value;
+}
+
+// 设定定位的最小更新距离。单位米，默认为 kCLDistanceFilterNone，表示只要检测到设备位置发生变化就会更新位置信息。
+RCT_EXPORT_METHOD(setDistanceFilter : (int)value) {
+  _manager.distanceFilter = value;
 }
 // 用于指定所需的精度级别。 定位服务将尽最大努力达到您想要的精度。 但是，不能保证。
 // 为了优化电源性能，请确保为您的使用情况指定适当的精度（例如，当仅需要粗略位置时，使用较大的精度值）。
@@ -108,6 +111,75 @@ RCT_EXPORT_METHOD(stop) {
 RCT_EXPORT_METHOD(setLocatingWithReGeocode: (BOOL)value) {
     _locatingWithReGeocode = value;
     [_manager setLocatingWithReGeocode: value];
+}
+
+// 逆地址语言类型，默认是AMapLocationRegionLanguageDefault
+// AMapLocationReGeocodeLanguageDefault = 0,          ///<默认，根据地区选择语言
+// AMapLocationReGeocodeLanguageChinse = 1,           ///<中文
+// AMapLocationReGeocodeLanguageEnglish = 2,          ///<英文
+RCT_EXPORT_METHOD(setGeoLanguage : (int)value) {
+  _manager.reGeocodeLanguage = (AMapLocationReGeocodeLanguage)value;
+}
+
+// 指定定位是否会被系统自动暂停。默认为NO。
+RCT_EXPORT_METHOD(setPausesLocationUpdatesAutomatically: (BOOL)value) {
+  _manager.pausesLocationUpdatesAutomatically = value;
+}
+// 是否允许后台定位。默认为NO。只在iOS 9.0及之后起作用。
+// 设置为YES的时候必须保证 Background Modes 中的 Location updates 处于选中状态，否则会抛出异常。
+RCT_EXPORT_METHOD(setAllowsBackgroundLocationUpdates: (BOOL)value) {
+  _manager.allowsBackgroundLocationUpdates = value;
+}
+
+/**
+ * @brief 转换目标经纬度为高德坐标系，不在枚举范围内的经纬度将直接返回。
+ * @param coordinate 待转换的经纬度
+ * @param typeNum    坐标系类型，对应的序号
+ * @return 高德坐标系经纬度
+ * https://lbs.amap.com/api/ios-sdk/guide/computing-equipment/amap-calculate-tool
+ */
+RCT_EXPORT_METHOD(coordinateConvert:
+                  (CLLocationCoordinate2D) coordinate
+      typer:(NSInteger)typeNum
+      resolver: (RCTPromiseResolveBlock)resolve
+      rejecter:(RCTPromiseRejectBlock)reject)
+{
+    AMapCoordinateType typeObj;
+    switch (typeNum) {
+        case -1:
+            typeObj = AMapCoordinateTypeAMap;
+            break;
+        case 0:
+            typeObj = AMapCoordinateTypeBaidu;
+            break;
+        case 1:
+            typeObj = AMapCoordinateTypeMapBar;
+            break;
+        case 2:
+            typeObj = AMapCoordinateTypeMapABC;
+            break;
+        case 3:
+            typeObj = AMapCoordinateTypeSoSoMap;
+            break;
+        case 4:
+            typeObj = AMapCoordinateTypeAliYun;
+            break;
+        case 5:
+            typeObj = AMapCoordinateTypeGoogle;
+            break;
+        case 6:
+            typeObj = AMapCoordinateTypeGPS;
+            break;
+        default:
+            typeObj = AMapCoordinateTypeGPS;
+            break;
+    }
+    
+    CLLocationCoordinate2D amapcoord = AMapCoordinateConvert(CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), typeObj);
+    resolve(@{
+        @"latitude": [NSNumber numberWithDouble:amapcoord.latitude],
+        @"longitude": [NSNumber numberWithDouble:amapcoord.longitude]
+    });
 }
 
 // 获取当前定位

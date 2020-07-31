@@ -82,6 +82,18 @@ export default class App extends Component {
     }
   }
 
+  coordinateConvert = async () => {
+    try {
+      // 将百度地图转换为 高德地图 经纬度
+      const resulte = await AMapGeolocation.coordinateConvert({
+        latitude: 40.002172,
+        longitude: 116.467357,
+      }, 0);
+      console.log('~coordinateConvert~~', resulte)
+    } catch (error) {
+      console.log('~coordinateConvert:error~~', error)
+    }
+  }
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -90,6 +102,11 @@ export default class App extends Component {
           <Button
             onPress={this.getLocationState}
             title={`获取连续定位状态: ${this.state.isStarted.toString()}`}
+            color="#841584"
+          />
+          <Button
+            onPress={this.coordinateConvert}
+            title={`百度地图 => 高德地图经纬度`}
             color="#841584"
           />
           <Button

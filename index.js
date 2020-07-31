@@ -29,18 +29,42 @@ export default class AMapGeolocation {
     return NativeModules.RNAMapGeolocation.isStarted();
   }
   /**
-   * 定位超时时间，最低2s
+   * 定位超时时间，最低 2s
    * @param {number} number 默认设置为2s
+   * @platform ios
    */
   static setLocationTimeout(number = 2) {
-    return NativeModules.RNAMapGeolocation.setLocationTimeout(number);
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setLocationTimeout(number);
+    }
   }
   /**
    * 逆地理请求超时时间，最低2s
    * @param {number} number 默认设置为2s
+   * @platform ios
    */
   static setReGeocodeTimeout(number = 2) {
-    return NativeModules.RNAMapGeolocation.setReGeocodeTimeout(number);
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setReGeocodeTimeout(number);
+    }
+  }
+  /**
+   * 坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标
+   * 
+   * - -1 -> `AMapCoordinateTypeAMap`     ///<AMap
+   * - 0 -> `AMapCoordinateTypeBaidu`     ///<Baidu
+   * - 1 -> `AMapCoordinateTypeMapBar`    ///<MapBar
+   * - 2 -> `AMapCoordinateTypeMapABC`    ///<MapABC
+   * - 3 -> `AMapCoordinateTypeSoSoMap`   ///<SoSoMap
+   * - 4 -> `AMapCoordinateTypeAliYun`    ///<AliYun
+   * - 5 -> `AMapCoordinateTypeGoogle`    ///<Google
+   * - 6 -> `AMapCoordinateTypeGPS`       ///<GPS
+   * @param {Object} coordinate 待转换的经纬度
+   * @param {Number} type 坐标系类型，对应的序号
+   * 如：39.989612,116.480972
+   */
+  static coordinateConvert(coordinate, type) {
+    return NativeModules.RNAMapGeolocation.coordinateConvert(coordinate, type);
   }
   /**
    * 用于指定所需的精度级别。
@@ -114,7 +138,35 @@ export default class AMapGeolocation {
       return NativeModules.RNAMapGeolocation.setNeedAddress(isReGeocode);
     }
   }
-
+  /**
+   * 设定定位的最小更新距离。单位米，默认，表示只要检测到设备位置发生变化就会更新位置信息。
+   * @param {number} time 
+   * @platform ios
+   */
+  static setDistanceFilter(time) {
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setDistanceFilter(time);
+    }
+  }
+  /**
+   * 指定定位是否会被系统自动暂停。默认为 false
+   * @platform ios
+   */
+  static setPausesLocationUpdatesAutomatically(value = false) {
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setPausesLocationUpdatesAutomatically(value);
+    }
+  }
+  /**
+   * 是否允许后台定位。默认为NO。只在iOS 9.0及之后起作用。
+   * 设置为YES的时候必须保证 Background Modes 中的 Location updates 处于选中状态，否则会抛出异常。
+   * @platform ios
+   */
+  static setAllowsBackgroundLocationUpdates(value = false) {
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.setAllowsBackgroundLocationUpdates(value);
+    }
+  }
   /**
    * 设置发起定位请求的时间间隔，单位：毫秒，默认值：2000毫秒
    * @platform android
@@ -150,12 +202,22 @@ export default class AMapGeolocation {
 
   /**
    * 设置逆地理信息的语言，目前之中中文和英文。
-   * @default DEFAULT
-   * @platform android
+   * @param {DEFAULT | EN | ZH} language
+   * @default DEFAULT 
    */
   static setGeoLanguage(language = 'DEFAULT') {
     if (Platform.OS === "android") {
       return NativeModules.RNAMapGeolocation.setGeoLanguage(language);
+    }
+    if (Platform.OS === "ios") {
+      let value = 0;
+      switch (language) {
+        case 'DEFAULT': value = 0; break;
+        case 'ZH': value = 1; break;
+        case 'EN': value = 2; break;
+        default: break;
+      }
+      return NativeModules.RNAMapGeolocation.setGeoLanguage(value);
     }
   }
 
