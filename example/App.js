@@ -66,18 +66,22 @@ export default class App extends Component {
   }
   // android是否开启gps优先
   gpsFirst = () => {
-    console.log('是否开启gps优先');
-    this.setState({
-      isGps: !this.state.isGps
-    }, () => {
-      console.log('GPS优先', this.state.isGps ? '开启' : '关闭')
-      if (this.state.isGps) {
-        return
-      } else {
-        AMapGeolocation.setGpsFirst(this.state.isGps);
-      }
-    })
+    if (Platform.OS == 'android') {
+      this.setState({
+        isGps: !this.state.isGps
+      }, () => {
+        console.log('GPS优先', this.state.isGps ? '开启' : '关闭')
+        if (this.state.isGps) {
+          return
+        } else {
+          AMapGeolocation.setGpsFirst(this.state.isGps);
+        }
+      })
+    } else {
+      return
+    }
   }
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
