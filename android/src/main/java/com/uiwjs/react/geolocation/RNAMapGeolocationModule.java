@@ -60,6 +60,10 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getCurrentLocation(final Promise promise) {
         try {
+            if (client == null) {
+                promise.reject("-1", "尚未调用 setApiKey() 进行初始化");
+                return;
+            }
             if (!client.isStarted()) {
                 client.startLocation();
             }
@@ -67,7 +71,7 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
             promise.resolve(toJSON(mLastAMapLocation));
             client.stopLocation();
         } catch (Exception e) {
-            promise.resolve(null);
+            promise.reject("-110", e.getMessage());
         }
     }
 
