@@ -29,7 +29,7 @@ RCT_EXPORT_MODULE()
         [_manager setDesiredAccuracy: kCLLocationAccuracyHundredMeters];
         // 设置不允许系统暂停定位
         [_manager setPausesLocationUpdatesAutomatically: NO];
-        
+
         [[AMapServices sharedServices] setEnableHTTPS:YES];
 
         _clManager = [CLLocationManager new];
@@ -107,6 +107,15 @@ RCT_EXPORT_METHOD(stop) {
     [_manager stopUpdatingLocation];
 }
 
+// 开始获取设备朝向，如果设备支持方向识别，则会通过代理回调方法-wx
+RCT_EXPORT_METHOD(startUpdatingHeading) {
+    [_manager startUpdatingHeading];
+}
+// 停止获取设备朝向-wx
+RCT_EXPORT_METHOD(stopUpdatingHeading) {
+    [_manager stopUpdatingHeading];
+}
+
 // 定位是否返回逆地理信息，默认NO。
 RCT_EXPORT_METHOD(setLocatingWithReGeocode: (BOOL)value) {
     _locatingWithReGeocode = value;
@@ -174,7 +183,7 @@ RCT_EXPORT_METHOD(coordinateConvert:
             typeObj = AMapCoordinateTypeGPS;
             break;
     }
-    
+
     CLLocationCoordinate2D amapcoord = AMapCoordinateConvert(CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), typeObj);
     resolve(@{
         @"latitude": [NSNumber numberWithDouble:amapcoord.latitude],
@@ -187,7 +196,7 @@ RCT_EXPORT_METHOD(coordinateConvert:
 RCT_EXPORT_METHOD(getCurrentLocation: (RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     [_clManager requestWhenInUseAuthorization];
-    // - kCLAuthorizationStatusAuthorizedWhenInUse 用户已授权仅在使用您的应用程序时使用其位置。 
+    // - kCLAuthorizationStatusAuthorizedWhenInUse 用户已授权仅在使用您的应用程序时使用其位置。
     // - kCLAuthorizationStatusAuthorizedAlways 用户已授权在任何时间使用其位置。
     // - kCLAuthorizationStatusNotDetermined 用户尚未对此应用做出选择
     if (status == kCLAuthorizationStatusAuthorizedAlways || status ==  kCLAuthorizationStatusAuthorizedWhenInUse || status ==  kCLAuthorizationStatusNotDetermined) {
@@ -215,7 +224,7 @@ RCT_EXPORT_METHOD(getCurrentLocation: (RCTPromiseResolveBlock)resolve rejecter:(
 }
 
 - (id)json:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode {
-    
+
     BOOL flag = AMapLocationDataAvailableForCoordinate(location.coordinate);
     // 逆地理信息
     if (reGeocode) {
@@ -241,7 +250,7 @@ RCT_EXPORT_METHOD(getCurrentLocation: (RCTPromiseResolveBlock)resolve rejecter:(
             @"poiName" : reGeocode.POIName ? reGeocode.POIName : @"",
             @"aoiName" : reGeocode.AOIName ? reGeocode.AOIName : @"",
         };
-       
+
     } else {
         // 定位信息
         return @{

@@ -29,6 +29,24 @@ export default class AMapGeolocation {
     return NativeModules.RNAMapGeolocation.isStarted();
   }
   /**
+   * 开始获取设备朝向，如果设备支持方向识别，则会通过代理回调方法-wx
+   * @platform ios
+   */
+  static startUpdatingHeading() {
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.startUpdatingHeading();
+    }
+  }
+  /**
+  * 停止获取设备朝向-wx
+  * @platform ios
+  */
+  static stopUpdatingHeading() {
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.stopUpdatingHeading();
+    }
+  }
+  /**
    * 定位超时时间，最低 2s
    * @param {number} number 默认设置为2s
    * @platform ios
@@ -50,7 +68,7 @@ export default class AMapGeolocation {
   }
   /**
    * 坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标
-   * 
+   *
    * - -1 -> `AMapCoordinateTypeAMap`     ///<AMap
    * - 0 -> `AMapCoordinateTypeBaidu`     ///<Baidu
    * - 1 -> `AMapCoordinateTypeMapBar`    ///<MapBar
@@ -140,7 +158,7 @@ export default class AMapGeolocation {
   }
   /**
    * 设定定位的最小更新距离。单位米，默认，表示只要检测到设备位置发生变化就会更新位置信息。
-   * @param {number} time 
+   * @param {number} time
    * @platform ios
    */
   static setDistanceFilter(time) {
@@ -203,7 +221,7 @@ export default class AMapGeolocation {
   /**
    * 设置逆地理信息的语言，目前之中中文和英文。
    * @param {DEFAULT | EN | ZH} language
-   * @default DEFAULT 
+   * @default DEFAULT
    */
   static setGeoLanguage(language = 'DEFAULT') {
     if (Platform.OS === "android") {
@@ -238,13 +256,33 @@ export default class AMapGeolocation {
     });
   }
   /**
-  * 设置是否gps优先
+  * 设置是否gps优先-wx
   * @default false
   * @platform android
   */
   static setGpsFirst(isSetGpsFirst) {
     if (Platform.OS === "android") {
       return NativeModules.RNAMapGeolocation.setGpsFirst(isSetGpsFirst);
+    }
+  }
+  /**
+  * 设置是否等待wifi刷新-wx
+  * @default false
+  * @platform android
+  */
+  static setOnceLocationLatest(isOnceLocationLatest) {
+    if (Platform.OS === "android") {
+      return NativeModules.RNAMapGeolocation.setOnceLocationLatest(isOnceLocationLatest);
+    }
+  }
+  /**
+  * 设置是否使用缓存策略, 默认为true 使用缓存策略-wx
+  * @default true
+  * @platform android
+  */
+  static setLocationCacheEnable(isLocationCacheEnable) {
+    if (Platform.OS === "android") {
+      return NativeModules.RNAMapGeolocation.setLocationCacheEnable(isLocationCacheEnable);
     }
   }
 }

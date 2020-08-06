@@ -7,7 +7,8 @@ export default class App extends Component {
     location: '',
     isListener: false,
     isStarted: false,
-    isGps: false
+    isGps: false,
+    isLocationCacheEnable: true
   };
   componentDidMount() {
     let apiKey = ''
@@ -34,6 +35,7 @@ export default class App extends Component {
         location: JSON.stringify(location, null, 2),
       });
     });
+    console.log('AMapGeolocation.addLocationListener', AMapGeolocation.startUpdatingHeading)
   }
   getCurrentLocation = async () => {
     try {
@@ -94,6 +96,22 @@ export default class App extends Component {
       console.log('~coordinateConvert:error~~', error)
     }
   }
+  // 开启缓存定位
+  setLocationCache = async () => {
+    if (Platform.OS == 'android') {
+      this.setState({
+        isLocationCacheEnable: !this.state.isLocationCacheEnable
+      }, () => {
+        if (this.state.isLocationCacheEnable) {
+          AMapGeolocation.setLocationCacheEnable(this.state.isLocationCacheEnable)
+          return console.log('已经开启缓存定位')
+        } else {
+          AMapGeolocation.setLocationCacheEnable(this.state.isLocationCacheEnable)
+          return console.log('关闭缓存定位')
+        }
+      })
+    }
+  }
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -123,10 +141,15 @@ export default class App extends Component {
           <Button
             onPress={this.gpsFirst}
             title="是否开启GPS优先"
-            title={`${this.state.isGps ? '关闭' : '开启'}GPS优先`}
+            title={`${this.state.isGps ? '关闭:' : '开启:'}androidGPS优先`}
             color="#841584"
           />
-
+          <Button
+            onPress={this.setLocationCache}
+            title="是否使用缓存定位"
+            title={`${this.state.isLocationCacheEnable ? '关闭:' : '开启:'}android使用缓存定位`}
+            color="#841584"
+          />
           <ScrollView style={{ flex: 1 }}>
             <Text>
               {this.state.location}
