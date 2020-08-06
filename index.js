@@ -29,6 +29,20 @@ export default class AMapGeolocation {
     return NativeModules.RNAMapGeolocation.isStarted();
   }
   /**
+   * 开始获取设备朝向，如果设备支持方向识别，则会通过代理回调方法-wx
+   * @platform ios
+   */
+  static startUpdatingHeading() {
+    return NativeModules.RNAMapGeolocation.startUpdatingHeading();
+  }
+  /**
+  * 停止获取设备朝向-wx
+  * @platform ios
+  */
+  static stopUpdatingHeading() {
+    return NativeModules.RNAMapGeolocation.stopUpdatingHeading();
+  }
+  /**
    * 定位超时时间，最低 2s
    * @param {number} number 默认设置为2s
    * @platform ios

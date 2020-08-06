@@ -143,6 +143,19 @@ export function start(): void;
  * 停止更新位置信息
  */
 export function stop(): void;
+
+/**
+ * 开始获取设备朝向，如果设备支持方向识别，则会通过代理回调方法-wx
+ * @platform ios
+ */
+export function startUpdatingHeading(): void;
+
+/**
+ * 停止获取设备朝向-wx
+ * @platform ios
+ */
+export function stopUpdatingHeading(): void;
+
 /**
  * 是否已经开始持续定位了
  */

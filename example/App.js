@@ -35,6 +35,7 @@ export default class App extends Component {
         location: JSON.stringify(location, null, 2),
       });
     });
+    console.log('AMapGeolocation.addLocationListener', AMapGeolocation.startUpdatingHeading)
   }
   getCurrentLocation = async () => {
     try {
@@ -149,7 +150,6 @@ export default class App extends Component {
             title={`${this.state.isLocationCacheEnable ? '关闭:' : '开启:'}android使用缓存定位`}
             color="#841584"
           />
-
           <ScrollView style={{ flex: 1 }}>
             <Text>
               {this.state.location}
