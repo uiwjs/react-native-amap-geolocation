@@ -168,7 +168,7 @@ export function isStarted(): Promise<Boolean>;
 export function setDesiredAccuracy(accuracy: 0 | 1 | 2 | 3 | 4 | 5): void;
 /**
  * 坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标
- * 
+ *
  * - -1 -> `AMapCoordinateTypeAMap`     // <AMap
  * - 0 -> `AMapCoordinateTypeBaidu`     // <Baidu
  * - 1 -> `AMapCoordinateTypeMapBar`    // <MapBar
@@ -271,10 +271,26 @@ export function setGeoLanguage(language: 'DEFAULT' | 'EN' | 'ZH'): void;
 export function addLocationListener(listener?: (location: Coordinates | ReGeocode) => void): void;
 
 /**
- * 设置是否gps优先
+ * 设置是否gps优先-wx
  * 只有在单次定位高精度定位模式下有效
  * 设置为true时，会等待卫星定位结果返回，最多等待30秒，若30秒后仍无卫星定位结果返回，返回网络定位结果
  * @default false
  * @platform android
  */
 export function setGpsFirst(isSetGpsFirst: boolean): void;
+
+/**
+ * 设置定位是否等待WIFI列表刷新-wx
+ * 定位精度会更高，但是定位速度会变慢1-3秒
+ * 从3.7.0版本开始，支持连续定位（连续定位时首次会等待刷新） 3.7.0之前的版本，仅适用于单次定位，当设置为true时，连续定位会自动变为单次定位,
+ * @default false
+ * @platform android
+ */
+export function setOnceLocationLatest(isOnceLocationLatest: boolean): void;
+
+/**
+ * 设置是否使用缓存策略, 默认为true 使用缓存策略
+ * @default true
+ * @platform android
+ */
+export function setLocationCacheEnable(isLocationCacheEnable: boolean): void;
