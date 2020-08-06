@@ -33,14 +33,18 @@ export default class AMapGeolocation {
    * @platform ios
    */
   static startUpdatingHeading() {
-    return NativeModules.RNAMapGeolocation.startUpdatingHeading();
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.startUpdatingHeading();
+    }
   }
   /**
   * 停止获取设备朝向-wx
   * @platform ios
   */
   static stopUpdatingHeading() {
-    return NativeModules.RNAMapGeolocation.stopUpdatingHeading();
+    if (Platform.OS === "ios") {
+      return NativeModules.RNAMapGeolocation.stopUpdatingHeading();
+    }
   }
   /**
    * 定位超时时间，最低 2s
