@@ -285,4 +285,26 @@ export default class AMapGeolocation {
       return NativeModules.RNAMapGeolocation.setLocationCacheEnable(isLocationCacheEnable);
     }
   }
+  /**
+  * 设置网络请求超时时间。默认为30秒-wx
+  * @default 30000
+  * @platform android
+  */
+  static setHttpTimeOut(httpTimeOut) {
+    if (Platform.OS === "android") {
+      return NativeModules.RNAMapGeolocation.setHttpTimeOut(httpTimeOut);
+    }
+  }
+
+  /**
+  * 设置网络请求的协议。可选HTTP或者HTTPS。默认为HTTP
+  * @param {HTTP |HTTPS} amapLocationProtocol
+  * @default HTTP
+  * @platform android
+  */
+  static setLocationProtocol(amapLocationProtocol = 'HTTP') {
+    if (Platform.OS === "android") {
+      return NativeModules.RNAMapGeolocation.setLocationProtocol(amapLocationProtocol)
+    }
+  }
 }

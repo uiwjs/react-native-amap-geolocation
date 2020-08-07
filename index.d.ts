@@ -307,3 +307,17 @@ export function setOnceLocationLatest(isOnceLocationLatest: boolean): void;
  * @platform android
  */
 export function setLocationCacheEnable(isLocationCacheEnable: boolean): void;
+
+/**
+ * 设置网络请求超时时间。默认为30秒。在仅设备模式下无效
+ * @default 30000
+ * @platform android
+ */
+export function setHttpTimeOut(httpTimeOut: number): void;
+
+/**
+ * 设置网络请求的协议。默认为HTTP协议。可选HTTP或者HTTPS
+ * @default HTTP
+ * @platform android
+ */
+export function setLocationProtocol(amapLocationProtocol: 'HTTP' | 'HTTPS'): void;
