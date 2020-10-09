@@ -1,7 +1,7 @@
 {
   "name": "@uiw/react-native-amap-geolocation",
   "title": "React Native Amap Geolocation",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "React Native 高德地图定位原生，支持 Android/iOS",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -13,6 +13,7 @@
     "ios/RNAMapGeolocation.h",
     "ios/RNAMapGeolocation.m",
     "ios/RNAMapGeolocation.podspec",
+    "ios/RNAMapGeolocation.xcworkspace/xcshareddata",
     "ios/RNAMapGeolocation.xcworkspace/contents.xcworkspacedata",
     "index.d.ts",
     "index.js",
