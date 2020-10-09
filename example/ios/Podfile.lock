@@ -1,7 +1,7 @@
 PODS:
-  - AMapFoundation (1.6.3)
-  - AMapLocation (2.6.5):
-    - AMapFoundation (~> 1.6.3)
+  - AMapFoundation (1.6.4)
+  - AMapLocation (2.6.7):
+    - AMapFoundation (~> 1.6.4)
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.4)
   - CocoaLibEvent (1.0.0)
@@ -299,7 +299,7 @@ PODS:
     - React-Core (= 0.63.0)
     - React-cxxreact (= 0.63.0)
     - React-jsi (= 0.63.0)
-  - RNAMapGeolocation (1.2.2):
+  - RNAMapGeolocation (1.5.0):
     - AMapFoundation
     - AMapLocation
     - React
@@ -431,8 +431,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AMapFoundation: 9ed923193b357ebb30a073e9fe255d3c24054d5a
-  AMapLocation: c566d448285cd502c1e313063d9e2460bd4d7100
+  AMapFoundation: 3638198dfa40be54648570c3520edefad288286b
+  AMapLocation: a46c30d9930d0f3a3bd21139d8f845d10ac3f01d
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
@@ -469,7 +469,7 @@ SPEC CHECKSUMS:
   React-RCTText: ba503bf4cce41881ca258ba789c33e017955efdd
   React-RCTVibration: 77ab1cf4a5eb854b88ad5ed3e9d8509ed124525e
   ReactCommon: f63556ee9e41e9802257228237e5e660451a03cf
-  RNAMapGeolocation: 6dde2d6f5e247faf023e618458dd72b5e8991f10
+  RNAMapGeolocation: 4c77a0a8269f378cf68117a15bc90595043e251d
   Yoga: 7d2edc5b410474191962e6dee88ee67f9b328b6b
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
