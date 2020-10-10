@@ -6,11 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		B935C90324C03F1A0092E786 /* AMapFoundationKit in Frameworks */ = {isa = PBXBuildFile; fileRef = B935C8FB24C034F10092E786 /* AMapFoundationKit */; };
-		B935C90424C03F280092E786 /* AMapLocationKit in Frameworks */ = {isa = PBXBuildFile; fileRef = B935C8FD24C034FA0092E786 /* AMapLocationKit */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -25,10 +20,6 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNAMapGeolocation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNAMapGeolocation.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B935C8F724C01EA60092E786 /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapLocationKit.framework; sourceTree = "<group>"; };
-		B935C8F924C01EB30092E786 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapFoundationKit.framework; sourceTree = "<group>"; };
-		B935C8FB24C034F10092E786 /* AMapFoundationKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = AMapFoundationKit; path = AMapFoundationKit.framework/AMapFoundationKit; sourceTree = "<group>"; };
-		B935C8FD24C034FA0092E786 /* AMapLocationKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = AMapLocationKit; path = AMapLocationKit.framework/AMapLocationKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,8 +27,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B935C90424C03F280092E786 /* AMapLocationKit in Frameworks */,
-				B935C90324C03F1A0092E786 /* AMapFoundationKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,10 +52,6 @@
 		B935C8F624C01EA60092E786 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B935C8FD24C034FA0092E786 /* AMapLocationKit */,
-				B935C8FB24C034F10092E786 /* AMapFoundationKit */,
-				B935C8F924C01EB30092E786 /* AMapFoundationKit.framework */,
-				B935C8F724C01EA60092E786 /* AMapLocationKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

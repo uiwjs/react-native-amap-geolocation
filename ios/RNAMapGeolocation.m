@@ -302,12 +302,12 @@ RCT_EXPORT_METHOD(getCurrentLocation: (RCTPromiseResolveBlock)resolve rejecter:(
  *  @param manager 定位 AMapLocationManager 类。
  *  @param error 返回的错误，参考 CLError 。
  */
- - (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error {
-   [self sendEventWithName: @"AMapGeolocation"
+- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error {
+    [self sendEventWithName: @"AMapGeolocation"
     body: @{
         @"errorCode": @(error.code),
         @"errorInfo": error.localizedDescription,
     }];
- }
+}
 
 @end
