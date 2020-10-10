@@ -4,9 +4,11 @@
 [![NPM Version](https://img.shields.io/npm/v/@uiw/react-native-amap-geolocation.svg)](https://npmjs.org/package/@uiw/react-native-amap-geolocation)
 ![David](https://img.shields.io/david/peer/uiwjs/react-native-amap-geolocation)
 
-React Native 高德地图定位模块，支持 Android/iOS。[完整的接口文档](https://uiwjs.github.io/react-native-amap-geolocation/)
+React Native 高德地图定位模块，支持 Android/iOS。提供尽可能完善的原生接口，同时提供符合 Web 标准的 Geolocation API 以及 [完整的接口文档](https://uiwjs.github.io/react-native-amap-geolocation/)。
 
 ## 注意事项
+
+⚠️ 定位部分 API 需要真机调试
 
 <details>
 <summary>Android：需要正确的设置 apiKey，获取 Key 的方法</summary>
