@@ -299,7 +299,7 @@ PODS:
     - React-Core (= 0.63.0)
     - React-cxxreact (= 0.63.0)
     - React-jsi (= 0.63.0)
-  - RNAMapGeolocation (1.5.0):
+  - RNAMapGeolocation (1.5.1):
     - AMapFoundation
     - AMapLocation
     - React
@@ -469,7 +469,7 @@ SPEC CHECKSUMS:
   React-RCTText: ba503bf4cce41881ca258ba789c33e017955efdd
   React-RCTVibration: 77ab1cf4a5eb854b88ad5ed3e9d8509ed124525e
   ReactCommon: f63556ee9e41e9802257228237e5e660451a03cf
-  RNAMapGeolocation: 4c77a0a8269f378cf68117a15bc90595043e251d
+  RNAMapGeolocation: fd31a6e203c58645e2e7c3c60572fc4f287ad7ba
   Yoga: 7d2edc5b410474191962e6dee88ee67f9b328b6b
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

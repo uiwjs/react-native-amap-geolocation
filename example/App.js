@@ -39,6 +39,7 @@ export default class App extends Component {
   }
   getCurrentLocation = async () => {
     try {
+      console.log('json:-getCurrentLocation-->>> 获取当前定位信息');
       const json = await AMapGeolocation.getCurrentLocation();
       console.log('json:-json-->>>', json);
       this.setState({
@@ -46,6 +47,7 @@ export default class App extends Component {
       })
     } catch (error) {
       console.log('json:-error-->>>', error);
+      console.log('json:-error-->>>', error.message);
     }
   }
   getLocationState = async () => {
