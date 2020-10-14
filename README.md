@@ -8,7 +8,7 @@ React Native 高德地图定位模块，支持 Android/iOS。提供尽可能完�
 
 ## 注意事项
 
-⚠️ 定位部分 API 需要真机调试
+⚠️ 高德地图定位部分 API 需要真机调试和 `Access WiFi Information` 权限。
 
 <details>
 <summary>Android：需要正确的设置 apiKey，获取 Key 的方法</summary>
