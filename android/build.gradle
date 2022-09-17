@@ -74,7 +74,7 @@ dependencies {
     // noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     // 支付宝 SDK AAR 包所需的配置
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'com.amap.api:location:5.1.0'
 }
 
 def configureReactNativePom(def pom) {
