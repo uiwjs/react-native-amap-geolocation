@@ -13,6 +13,7 @@
     "ios/RNAMapGeolocation.h",
     "ios/RNAMapGeolocation.m",
     "ios/RNAMapGeolocation.podspec",
+    "RNAMapGeolocation.podspec",
     "ios/RNAMapGeolocation.xcworkspace/xcshareddata",
     "ios/RNAMapGeolocation.xcworkspace/contents.xcworkspacedata",
     "index.d.ts",
