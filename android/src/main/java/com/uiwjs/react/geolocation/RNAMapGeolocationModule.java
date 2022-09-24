@@ -270,9 +270,9 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
     int typer,
     final Promise promise
   ) {
-    // if (client == null) {
-    //     return;
-    // }
+    if (client == null) {
+      return;
+    }
     try {
       // { latitude: 40.002172, longitude: 116.467357 }
       // 构造一个示例坐标，第一个参数是纬度，第二个参数是经度
