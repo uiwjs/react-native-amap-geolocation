@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, SafeAreaView, ScrollView } from 'react-native';
 import AMapGeolocation from '@uiw/react-native-amap-geolocation';
-
+import {
+  PermissionsAndroid,
+} from 'react-native'
 export default class App extends Component {
   state = {
     location: '',
@@ -10,7 +12,12 @@ export default class App extends Component {
     isGps: false,
     isLocationCacheEnable: true
   };
-  componentDidMount() {
+  async componentDidMount() {
+    await PermissionsAndroid.requestMultiple([
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION
+    ])
+
     let apiKey = ''
     if (Platform.OS === 'ios') {
       apiKey = '00b74444d56a1f9e036b608a52f0da33';
