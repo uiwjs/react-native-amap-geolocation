@@ -20,8 +20,8 @@ RCT_EXPORT_MODULE()
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [AMapLocationManager updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
-        [AMapLocationManager updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
+        // [AMapLocationManager updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
+        // [AMapLocationManager updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
         _manager = [[AMapLocationManager alloc] init];
         _manager.delegate = self;
         // https://lbs.amap.com/api/ios-location-sdk/guide/get-location/singlelocation
