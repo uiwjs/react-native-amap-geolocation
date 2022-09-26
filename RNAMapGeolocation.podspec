@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "AMapLocation", "2.9.0"
+  s.dependency "AMapLocation", "2.6.7"
   # ...
   # s.dependency "..."
 end
