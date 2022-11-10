@@ -77,7 +77,8 @@
 					<br />
 					<p>官方获取 Key方法：<a href="https://lbs.amap.com/api/android-location-sdk/guide/create-project/get-key">https://lbs.amap.com/api/android-location-sdk/guide/create-project/get-key</a></p>
 					<p>A. 使用 <code>keytool</code>（jdk自带工具）获取 <code>SHA1</code>，默认 测试版本 <code>keystore</code> 路径 <code>&lt;项目名称&gt;/android/app/debug.keystore</code></p>
-					<pre><code class="language-bash">keytool -v -list -keystore  keystore文件路径</code></pre>
+					<pre><code class="language-bash">keytool -v -list -keystore  keystore文件路径
+</code></pre>
 					<p>B. 获取 <code>PackageName</code>，获取路径 <code>&lt;项目名称&gt;/android/app/src/main/AndroidManifest.xml</code></p>
 					<p>C. 在高德地图账号中设置 <code>SHA1</code> 和 <code>PackageName</code>。</p>
 					<img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/sha1.png" />
@@ -100,7 +101,8 @@
 					<summary>iOS：高德地图包需要 WiFi 权限</summary>
 					<br />
 					<p>iOS 端高德地图包需要 WiFi 权限，否则报如下警告：</p>
-					<pre><code>nehelper sent invalid result code [<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> Wi-Fi information request</code></pre>
+					<pre><code><span class="hljs-selector-tag">nehelper</span> <span class="hljs-selector-tag">sent</span> <span class="hljs-selector-tag">invalid</span> <span class="hljs-selector-tag">result</span> <span class="hljs-selector-tag">code</span> <span class="hljs-selector-attr">[1]</span> <span class="hljs-selector-tag">for</span> <span class="hljs-selector-tag">Wi-Fi</span> <span class="hljs-selector-tag">information</span> <span class="hljs-selector-tag">request</span>
+</code></pre>
 					<p>需要在<a href="https://developer.apple.com">开发者账号中设置 WiFi 权限</a></p>
 					<img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/identifiers.png" />
 					<p>同时需要在 Xcode 中添加 <code>Access WiFi Information</code> 能力选项</p>
@@ -119,7 +121,8 @@
 				</a>
 				<pre><code class="language-bash">yarn add @uiw/react-native-amap-geolocation
 <span class="hljs-comment"># react-native version &gt;= 0.60+</span>
-$ <span class="hljs-built_in">cd</span> ios &amp;&amp; pod install</code></pre>
+$ <span class="hljs-built_in">cd</span> ios &amp;&amp; pod install
+</code></pre>
 				<a href="#基本用法" id="基本用法" style="color: inherit; text-decoration: none;">
 					<h2>基本用法</h2>
 				</a>
@@ -151,7 +154,8 @@ AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>)
   } <span class="hljs-keyword">catch</span> (error) {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;error:&#x27;</span>, error);
   }
-}</code></pre>
+}
+</code></pre>
 				<a href="#定位监听函数" id="定位监听函数" style="color: inherit; text-decoration: none;">
 					<h2>定位监听函数</h2>
 				</a>
@@ -175,7 +179,8 @@ AMapGeolocation.addLocationListener(<span class="hljs-function">(<span class="hl
   <span class="hljs-built_in">this</span>.setState({
     <span class="hljs-attr">location</span>: <span class="hljs-built_in">JSON</span>.stringify(location, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>), 
   });
-});</code></pre>
+});
+</code></pre>
 				<a href="#逆地理编码" id="逆地理编码" style="color: inherit; text-decoration: none;">
 					<h2>逆地理编码</h2>
 				</a>
@@ -192,7 +197,8 @@ AMapGeolocation.addLocationListener(<span class="hljs-function">(<span class="hl
 <span class="hljs-comment">// 设置 高德地图 apiKey</span>
 AMapGeolocation.setApiKey(apiKey);
 <span class="hljs-comment">// 定位是否返回逆地理信息</span>
-AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>);</code></pre>
+AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>);
+</code></pre>
 				<a href="#坐标转换" id="坐标转换" style="color: inherit; text-decoration: none;">
 					<h2>坐标转换</h2>
 				</a>
@@ -204,7 +210,8 @@ AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>)
   <span class="hljs-attr">latitude</span>: <span class="hljs-number">40.002172</span>,
   <span class="hljs-attr">longitude</span>: <span class="hljs-number">116.467357</span>,
 }, <span class="hljs-number">0</span>);
-<span class="hljs-comment">// =&gt; {longitude: 116.46071927031961, latitude: 39.99651501274128}</span></code></pre>
+<span class="hljs-comment">// =&gt; {longitude: 116.46071927031961, latitude: 39.99651501274128}</span>
+</code></pre>
 				<a href="#定位回调频率限制" id="定位回调频率限制" style="color: inherit; text-decoration: none;">
 					<h2>定位回调频率限制</h2>
 				</a>
@@ -214,19 +221,23 @@ AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>)
 AMapGeolocation.setInterval(<span class="hljs-number">5000</span>);
 
 <span class="hljs-comment">// ios，设备移动超过 10 米才会更新位置信息</span>
-AMapGeolocation.setDistanceFilter(<span class="hljs-number">10</span>);</code></pre>
+AMapGeolocation.setDistanceFilter(<span class="hljs-number">10</span>);
+</code></pre>
 				<a href="#错误处理" id="错误处理" style="color: inherit; text-decoration: none;">
 					<h2>错误处理</h2>
 				</a>
-				<pre><code class="language-bash">[NetworkInfo] Signal strength query returned error: Error Domain=NSPOSIXErrorDomain Code=13 <span class="hljs-string">&quot;Permission denied&quot;</span>, descriptor: &lt;CTServiceDescriptor 0x283317100, domain=1, instance=1&gt;</code></pre>
+				<pre><code class="language-bash">[NetworkInfo] Signal strength query returned error: Error Domain=NSPOSIXErrorDomain Code=13 <span class="hljs-string">&quot;Permission denied&quot;</span>, descriptor: &lt;CTServiceDescriptor 0x283317100, domain=1, instance=1&gt;
+</code></pre>
 				<p>在 <code>Product</code> -&gt; <code>Scheme</code> -&gt; <code>Edit Scheme</code> -&gt; <code>Run</code> -&gt; <code>Arguments</code> -&gt; <code>Environment Variables</code> 添加 <code>OS_ACTIVITY_MODE</code> <code>disable</code></p>
-				<pre><code class="language-bash">nehelper sent invalid result code [1] <span class="hljs-keyword">for</span> Wi-Fi information request</code></pre>
+				<pre><code class="language-bash">nehelper sent invalid result code [1] <span class="hljs-keyword">for</span> Wi-Fi information request
+</code></pre>
 				<p>配置 WiFi 权限</p>
 				<a href="#其它" id="其它" style="color: inherit; text-decoration: none;">
 					<h2>其它</h2>
 				</a>
 				<p>当前工程基于 <a href="https://github.com/brodybits/create-react-native-module">@brodybits/create-react-native-module</a> 初始化。</p>
-				<pre><code class="language-bash">npx create-react-native-module --package-identifier com.uiwjs.react.geolocation --object-class-name RNAMapGeolocation --generate-example AMapGeolocation --example-react-native-version 0.63.0 --module-name @uiw/react-native-amap-geolocation --github-account uiwjs --author-name <span class="hljs-string">&quot;Kenny Wong&quot;</span> --author-email <span class="hljs-string">&quot;wowohoo@qq.com&quot;</span></code></pre>
+				<pre><code class="language-bash">npx create-react-native-module --package-identifier com.uiwjs.react.geolocation --object-class-name RNAMapGeolocation --generate-example AMapGeolocation --example-react-native-version 0.63.0 --module-name @uiw/react-native-amap-geolocation --github-account uiwjs --author-name <span class="hljs-string">&quot;Kenny Wong&quot;</span> --author-email <span class="hljs-string">&quot;wowohoo@qq.com&quot;</span>
+</code></pre>
 				<a href="#开发" id="开发" style="color: inherit; text-decoration: none;">
 					<h2>开发</h2>
 				</a>
@@ -234,7 +245,8 @@ AMapGeolocation.setDistanceFilter(<span class="hljs-number">10</span>);</code></
 yarn install <span class="hljs-comment"># 安装依赖</span>
 
 <span class="hljs-built_in">cd</span> ios     <span class="hljs-comment"># 进入 example/ios 目录安装依赖</span>
-pod instll <span class="hljs-comment"># 安装依赖</span></code></pre>
+pod instll <span class="hljs-comment"># 安装依赖</span>
+</code></pre>
 				<a href="#相关连接" id="相关连接" style="color: inherit; text-decoration: none;">
 					<h2>相关连接</h2>
 				</a>
