@@ -1,3 +1,5 @@
+import { EmitterSubscription } from 'react-native';
+
 /** 一个地理坐标点。 */
 export interface Point {
   /** 纬度 */
@@ -121,7 +123,7 @@ export function stopUpdatingHeading(): void;
 /**
  * 是否已经开始持续定位了
  */
-export function isStarted(): Promise<Boolean>;
+export function isStarted(): Promise<boolean>;
 /**
  * 用于指定所需的精度级别。
  * 单位米，默认为 kCLLocationAccuracyBest。定位服务会尽可能去获取满足desiredAccuracy的定位结果，但不保证一定会得到满足期望的结果。
@@ -243,7 +245,7 @@ export function setGeoLanguage(language: 'DEFAULT' | 'EN' | 'ZH'): void;
  * 连续定位监听事件
  * @param {Function} listener
  */
-export function addLocationListener(listener?: (location: Coordinates | ReGeocode) => void): void;
+export function addLocationListener(listener?: (location: Coordinates | ReGeocode) => void): EmitterSubscription;
 
 /**
  * 设置是否gps优先-wx
