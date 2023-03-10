@@ -1,14 +1,8 @@
-/**
- * 一个地理坐标点。
- */
+/** 一个地理坐标点。 */
 export interface Point {
-  /**
-   * 纬度
-   */
+  /** 纬度 */
   latitude: number;
-  /**
-   * 经度
-   */
+  /** 经度 */
   longitude: number;
 }
 
@@ -17,25 +11,15 @@ export interface Point {
  * @see https://developer.mozilla.org/zh-CN/docs/Web/API/Coordinates
  */
 export interface Coordinates extends Point {
-  /**
-   * 高度 - 海拔高度，以米为单位。
-   */
+  /** 高度 - 海拔高度，以米为单位。 */
   altitude: number;
-  /**
-   * 水平精度 - 位置的不确定性半径，以米为单位。
-   */
+  /** 水平精度 - 位置的不确定性半径，以米为单位。 */
   accuracy: number;
-  /**
-   * 移动方向，需要 GPS
-   */
+  /** 移动方向，需要 GPS */
   heading: number;
-  /**
-   * 移动速度（米/秒），需要 GPS
-   */
+  /** 移动速度（米/秒），需要 GPS */
   speed: number;
-  /**
-   * 时间戳记 - 确定此位置的时间。
-   */
+  /** 时间戳记 - 确定此位置的时间。 */
   timestamp: number;
   /**
    * 是否有可用坐标
@@ -48,25 +32,15 @@ export interface Coordinates extends Point {
  * 逆地理信息 + 坐标信息
  */
 export interface ReGeocode extends Coordinates {
-  /**
-   * 格式化地址
-   */
+  /** 格式化地址 */
   address: string;
-  /**
-   * 国家
-   */
+  /** 国家 */
   country: string;
-  /**
-   * 省/直辖市，如 `湖北省`
-   */
+  /** 省/直辖市，如 `湖北省` */
   province: string;
-  /**
-   * 市，如 `武汉市`。对应城市{@link cityCode}编码
-   */
+  /** 市，如 `武汉市`。对应城市{@link cityCode}编码 */
   city: string;
-  /**
-   * 区，如 `武昌区`。对应区域{@link adCode}编码
-   */
+  /** 区，如 `武昌区`。对应区域{@link adCode}编码 */
   district: string;
 
   // ///乡镇
@@ -81,29 +55,17 @@ export interface ReGeocode extends Coordinates {
   // // 该字段从v2.2.0版本起不再返回数据,建议您使用AMapSearchKit的逆地理功能获取.
   // building: string;
 
-  /**
-   * 城市编码
-   */
+  /** 城市编码 */
   cityCode: string;
-  /**
-   * 区域编码
-   */
+  /** * 区域编码 */
   adCode: string;
-  /**
-   * 街道名称
-   */
+  /** 街道名称 */
   street: string;
-  /**
-   * 门牌号
-   */
+  /** 门牌号 */
   streetNumber: string;
-  /**
-   * 兴趣点名称
-   */
+  /** 兴趣点名称 */
   poiName: string;
-  /**
-   * 所属兴趣点名称
-   */
+  /** 所属兴趣点名称 */
   aoiName: string;
   /**
    * 获取定位信息描述
