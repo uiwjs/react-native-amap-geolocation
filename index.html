@@ -101,7 +101,7 @@
 					<summary>iOS：高德地图包需要 WiFi 权限</summary>
 					<br />
 					<p>iOS 端高德地图包需要 WiFi 权限，否则报如下警告：</p>
-					<pre><code><span class="hljs-selector-tag">nehelper</span> <span class="hljs-selector-tag">sent</span> <span class="hljs-selector-tag">invalid</span> <span class="hljs-selector-tag">result</span> <span class="hljs-selector-tag">code</span> <span class="hljs-selector-attr">[1]</span> <span class="hljs-selector-tag">for</span> <span class="hljs-selector-tag">Wi-Fi</span> <span class="hljs-selector-tag">information</span> <span class="hljs-selector-tag">request</span>
+					<pre><code>nehelper sent invalid result <span class="hljs-selector-tag">code</span> <span class="hljs-selector-attr">[1]</span> for Wi-Fi information request
 </code></pre>
 					<p>需要在<a href="https://developer.apple.com">开发者账号中设置 WiFi 权限</a></p>
 					<img src="https://raw.githubusercontent.com/uiwjs/react-native-amap-geolocation/master/imgs/identifiers.png" />
@@ -146,7 +146,13 @@ AMapGeolocation.setDesiredAccuracy(<span class="hljs-number">3</span>);
 AMapGeolocation.setLocationMode(<span class="hljs-number">1</span>);
 <span class="hljs-comment">// 定位是否返回逆地理信息</span>
 AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>);
-
+<span class="hljs-comment">// 开始定位</span>
+AMapGeolocation.start();
+<span class="hljs-comment">// 停止更新位置信息</span>
+AMapGeolocation.start();
+<span class="hljs-comment">// 是否已经开始持续定位了</span>
+AMapGeolocation.isStarted();
+<span class="hljs-comment">// 在某些情况获取不到数据，建议使用 `addLocationListener` 来实现</span>
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCurrentLocation</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">try</span> {
     <span class="hljs-keyword">const</span> json = <span class="hljs-keyword">await</span> AMapGeolocation.getCurrentLocation();
@@ -174,11 +180,12 @@ AMapGeolocation.setApiKey(apiKey);
 <span class="hljs-comment">// 定位是否返回逆地理信息</span>
 AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>);
 <span class="hljs-comment">// 当设备可以正常联网时，还可以返回该定位点的对应的中国境内位置信息（包括：省、市、区/县以及详细地址）。</span>
-AMapGeolocation.addLocationListener(<span class="hljs-function">(<span class="hljs-params">location</span>) =&gt;</span> {
+<span class="hljs-keyword">const</span> listener = AMapGeolocation.addLocationListener(<span class="hljs-function">(<span class="hljs-params">location</span>) =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;返回定位信息&#x27;</span>, location);
   <span class="hljs-built_in">this</span>.setState({
     <span class="hljs-attr">location</span>: <span class="hljs-built_in">JSON</span>.stringify(location, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>), 
   });
+  listener.remove();
 });
 </code></pre>
 				<a href="#逆地理编码" id="逆地理编码" style="color: inherit; text-decoration: none;">
@@ -222,6 +229,295 @@ AMapGeolocation.setInterval(<span class="hljs-number">5000</span>);
 
 <span class="hljs-comment">// ios，设备移动超过 10 米才会更新位置信息</span>
 AMapGeolocation.setDistanceFilter(<span class="hljs-number">10</span>);
+</code></pre>
+				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+					<h2>API</h2>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-comment">/** 一个地理坐标点。 */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Point {
+  <span class="hljs-comment">/** 纬度 */</span>
+  <span class="hljs-attr">latitude</span>: <span class="hljs-built_in">number</span>;
+  <span class="hljs-comment">/** 经度 */</span>
+  longitude: <span class="hljs-built_in">number</span>;
+}
+
+<span class="hljs-comment">/**
+ * 坐标信息
+ * <span class="hljs-doctag">@see </span>https://developer.mozilla.org/zh-CN/docs/Web/API/Coordinates
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Coordinates <span class="hljs-keyword">extends</span> Point {
+  <span class="hljs-comment">/** 高度 - 海拔高度，以米为单位。 */</span>
+  <span class="hljs-attr">altitude</span>: <span class="hljs-built_in">number</span>;
+  <span class="hljs-comment">/** 水平精度 - 位置的不确定性半径，以米为单位。 */</span>
+  accuracy: <span class="hljs-built_in">number</span>;
+  <span class="hljs-comment">/** 移动方向，需要 GPS */</span>
+  heading: <span class="hljs-built_in">number</span>;
+  <span class="hljs-comment">/** 移动速度（米/秒），需要 GPS */</span>
+  speed: <span class="hljs-built_in">number</span>;
+  <span class="hljs-comment">/** 时间戳记 - 确定此位置的时间。 */</span>
+  timestamp: <span class="hljs-built_in">number</span>;
+  <span class="hljs-comment">/**
+   * 是否有可用坐标
+   * <span class="hljs-doctag">@platform <span class="hljs-variable">ios</span></span>
+   */</span>
+  isAvailableCoordinate?: <span class="hljs-built_in">boolean</span>;
+}
+
+<span class="hljs-comment">/**
+ * 逆地理信息 + 坐标信息
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> ReGeocode <span class="hljs-keyword">extends</span> Coordinates {
+  <span class="hljs-comment">/** 格式化地址 */</span>
+  <span class="hljs-attr">address</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/** 国家 */</span>
+  country: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/** 省/直辖市，如 `湖北省` */</span>
+  province: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/** 市，如 `武汉市`。对应城市&lt;a href=&quot;interfaces/regeocode.html#citycode&quot;&gt;cityCode&lt;/a&gt;编码 */</span>
+  city: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/** 区，如 `武昌区`。对应区域&lt;a href=&quot;interfaces/regeocode.html#adcode&quot;&gt;adCode&lt;/a&gt;编码 */</span>
+  district: <span class="hljs-built_in">string</span>;
+
+  <span class="hljs-comment">// ///乡镇</span>
+  <span class="hljs-comment">// // 该字段从v2.2.0版本起不再返回数据,建议您使用AMapSearchKit的逆地理功能获取.</span>
+  <span class="hljs-comment">// township: string;</span>
+
+  <span class="hljs-comment">// ///社区</span>
+  <span class="hljs-comment">// // 该字段从v2.2.0版本起不再返回数据,建议您使用AMapSearchKit的逆地理功能获取.</span>
+  <span class="hljs-comment">// neighborhood: string;</span>
+
+  <span class="hljs-comment">// ///建筑</span>
+  <span class="hljs-comment">// // 该字段从v2.2.0版本起不再返回数据,建议您使用AMapSearchKit的逆地理功能获取.</span>
+  <span class="hljs-comment">// building: string;</span>
+
+  <span class="hljs-comment">/** 城市编码 */</span>
+  cityCode: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/** * 区域编码 */</span>
+  adCode: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/** 街道名称 */</span>
+  street: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/** 门牌号 */</span>
+  streetNumber: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/** 兴趣点名称 */</span>
+  poiName: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/** 所属兴趣点名称 */</span>
+  aoiName: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/**
+   * 获取定位信息描述
+   * <span class="hljs-doctag">@version </span>SDK2.0.0 开始支持
+   * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+   */</span>
+  description?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-comment">/**
+   * 获取坐标系类型 高德定位sdk会返回两种坐标系：
+   * 坐标系 AMapLocation.COORD_TYPE_GCJ02 -- GCJ02
+   * 坐标系 AMapLocation.COORD_TYPE_WGS84 -- WGS84
+   * 国外定位时返回的是WGS84坐标系
+   * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+   */</span>
+  coordType?: <span class="hljs-string">&#x27;GCJ02&#x27;</span> | <span class="hljs-string">&#x27;WGS84&#x27;</span>;
+  <span class="hljs-comment">/**
+   * 返回支持室内定位的建筑物ID信息
+   * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+   */</span>
+  buildingId?: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-comment">/**
+ * 配置高德地图 Key
+ * -
+ * - [高德获取 iOS key 文档地址](https://lbs.amap.com/api/ios-location-sdk/guide/create-project/get-key)
+ * - [高德获取 Android key 文档地址](https://lbs.amap.com/api/android-location-sdk/guide/create-project/get-key)
+ *
+ * 注意：安卓设置 key 很重要，由于在 android 平台必须优先设置 ApiKey 才能初始化 地图实例。
+ * 所以这个方法在android 平台下，还附带了初始化地图实例。
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setApiKey</span>(<span class="hljs-params">scheme: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 开始连续定位
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">start</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 停止更新位置信息
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stop</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span></span>;
+
+<span class="hljs-comment">/**
+ * 开始获取设备朝向，如果设备支持方向识别，则会通过代理回调方法-wx
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">ios</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">startUpdatingHeading</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span></span>;
+
+<span class="hljs-comment">/**
+ * 停止获取设备朝向-wx
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">ios</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stopUpdatingHeading</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span></span>;
+
+<span class="hljs-comment">/**
+ * 是否已经开始持续定位了
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isStarted</span>(<span class="hljs-params"></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">Boolean</span>&gt;</span>;
+<span class="hljs-comment">/**
+ * 用于指定所需的精度级别。
+ * 单位米，默认为 kCLLocationAccuracyBest。定位服务会尽可能去获取满足desiredAccuracy的定位结果，但不保证一定会得到满足期望的结果。
+ * 注意：设置为 kCLLocationAccuracyBest 或 kCLLocationAccuracyBestForNavigation 时，
+ * 单次定位会在达到 locationTimeout 设定的时间后，将时间内获取到的最高精度的定位结果返回。
+ * 高德提供了 kCLLocationAccuracyBest 参数，设置该参数可以获取到精度在10m 左右的定位结果，但是相应的需要付出比较长的时间（10s左右），
+ * 越高的精度需要持续定位时间越长。
+ * 推荐：kCLLocationAccuracyHundredMeters，一次还不错的定位，偏差在百米左右，超时时间设置在2s-3s左右即可。
+ *
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number}</span> </span>accuracy 1
+ * - 0 =&gt; kCLLocationAccuracyBestForNavigation
+ * - 1 =&gt; kCLLocationAccuracyBest
+ * - 2 =&gt; kCLLocationAccuracyNearestTenMeters
+ * - 3 =&gt; kCLLocationAccuracyHundredMeters
+ * - 4 =&gt; kCLLocationAccuracyKilometer
+ * - 5 =&gt; kCLLocationAccuracyThreeKilometers
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">ios</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setDesiredAccuracy</span>(<span class="hljs-params">accuracy: <span class="hljs-number">0</span> | <span class="hljs-number">1</span> | <span class="hljs-number">2</span> | <span class="hljs-number">3</span> | <span class="hljs-number">4</span> | <span class="hljs-number">5</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 坐标转换，支持将iOS自带定位 GPS/Google/MapBar/Baidu/MapABC 多种坐标系的坐标转换成高德坐标
+ *
+ * - -1 -&gt; `AMapCoordinateTypeAMap`     // &lt;AMap
+ * - 0 -&gt; `AMapCoordinateTypeBaidu`     // &lt;Baidu
+ * - 1 -&gt; `AMapCoordinateTypeMapBar`    // &lt;MapBar
+ * - 2 -&gt; `AMapCoordinateTypeMapABC`    // &lt;MapABC
+ * - 3 -&gt; `AMapCoordinateTypeSoSoMap`   // &lt;SoSoMap
+ * - 4 -&gt; `AMapCoordinateTypeAliYun`    // &lt;AliYun
+ * - 5 -&gt; `AMapCoordinateTypeGoogle`    // &lt;Google
+ * - 6 -&gt; `AMapCoordinateTypeGPS`       // &lt;GPS
+ * <span class="hljs-doctag">@param </span>coordinate 待转换的经纬度
+ * <span class="hljs-doctag">@param </span>type 坐标系类型，对应的序号
+ * 如：coordinate = { latitude: 40.002172, longitude: 116.467357 }
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">coordinateConvert</span>(<span class="hljs-params">coordinate: Point, <span class="hljs-keyword">type</span>: -<span class="hljs-number">1</span> | <span class="hljs-number">0</span> | <span class="hljs-number">1</span> | <span class="hljs-number">2</span> | <span class="hljs-number">3</span> | <span class="hljs-number">4</span> | <span class="hljs-number">5</span> | <span class="hljs-number">6</span></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">Point</span>&gt;</span>;
+<span class="hljs-comment">/**
+ * 设置发起定位请求的时间间隔，单位：毫秒，默认值：2000毫秒
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+ * <span class="hljs-doctag">@default </span>2000
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setInterval</span>(<span class="hljs-params">interval: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 指定定位是否会被系统自动暂停。默认为 false
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">ios</span></span>
+ * <span class="hljs-doctag">@param </span>value false
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setPausesLocationUpdatesAutomatically</span>(<span class="hljs-params">value: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 是否允许后台定位。默认为NO。只在iOS 9.0及之后起作用。
+ * 设置为YES的时候必须保证 Background Modes 中的 Location updates 处于选中状态，否则会抛出异常。
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">ios</span></span>
+ * <span class="hljs-doctag">@param </span>value false
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setAllowsBackgroundLocationUpdates</span>(<span class="hljs-params">value: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 设定定位的最小更新距离。单位米，默认，表示只要检测到设备位置发生变化就会更新位置信息。
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">ios</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setDistanceFilter</span>(<span class="hljs-params">time: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 定位超时时间，最低2s
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">ios</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setLocationTimeout</span>(<span class="hljs-params"><span class="hljs-built_in">number</span>: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 逆地理请求超时时间，最低 2s，默认为2s 注意在单次定位请求前设置。
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">ios</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setReGeocodeTimeout</span>(<span class="hljs-params"><span class="hljs-built_in">number</span>: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 获取当前定位
+ * 默认只获取经纬度，`iOS` 通过 &lt;a href=&quot;globals.html#setlocatingwithregeocode&quot;&gt;&lt;code&gt;setLocatingWithReGeocode&lt;/code&gt;&lt;/a&gt;  设置，是否返回逆地理信息
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCurrentLocation</span>(<span class="hljs-params"></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">Coordinates</span> | <span class="hljs-title">ReGeocode</span>&gt;</span>;
+<span class="hljs-comment">/**
+ * 定位是否返回逆地理信息，为了与 android 保持一致，默认 值为 true。
+ * <span class="hljs-doctag">@platform </span>ios 默认值：false, 返回地址信息，需要手动设置
+ * <span class="hljs-doctag">@platform </span>android 默认值：true, 返回地址信息
+ * <span class="hljs-doctag">@default <span class="hljs-variable">true</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setLocatingWithReGeocode</span>(<span class="hljs-params">isReGeocode: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 设置定位模式。
+ * 默认值：`Hight_Accuracy` 高精度模式
+ * android 默认定位模式，目前支持三种定位模式
+ * - 1 =&gt; `Hight_Accuracy` 高精度定位模式：在这种定位模式下，将同时使用高德网络定位和卫星定位,优先返回精度高的定位
+ * - 2 =&gt; `Battery_Saving` 低功耗定位模式：在这种模式下，将只使用高德网络定位
+ * - 3 =&gt; `Device_Sensors` 仅设备定位模式：在这种模式下，将只使用卫星定位。
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number}</span> </span>mode `1~3`
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+ * <span class="hljs-doctag">@default </span>1
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setLocationMode</span>(<span class="hljs-params">mode: <span class="hljs-number">1</span> | <span class="hljs-number">2</span> | <span class="hljs-number">3</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 设置是否单次定位
+ * <span class="hljs-doctag">@default <span class="hljs-variable">false</span></span>
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setOnceLocation</span>(<span class="hljs-params">isOnceLocation: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 设置是否使用设备传感器。是否开启设备传感器，当设置为true时，网络定位可以返回海拔、角度和速度。
+ * <span class="hljs-doctag">@default <span class="hljs-variable">false</span></span>
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setSensorEnable</span>(<span class="hljs-params">sensorEnable: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 设置是否允许调用 WIFI 刷新。
+ * 默认值为true，当设置为false时会停止主动调用WIFI刷新，将会极大程度影响定位精度，但可以有效的降低定位耗电
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+ * <span class="hljs-doctag">@default <span class="hljs-variable">true</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setWifiScan</span>(<span class="hljs-params">isOnceLocation: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 设置逆地理信息的语言，目前之中中文和英文。
+ * <span class="hljs-doctag">@default <span class="hljs-variable">DEFAULT</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setGeoLanguage</span>(<span class="hljs-params">language: <span class="hljs-string">&#x27;DEFAULT&#x27;</span> | <span class="hljs-string">&#x27;EN&#x27;</span> | <span class="hljs-string">&#x27;ZH&#x27;</span></span>): <span class="hljs-title">void</span></span>;
+<span class="hljs-comment">/**
+ * 连续定位监听事件
+ * <span class="hljs-doctag">@param <span class="hljs-type">{Function}</span> <span class="hljs-variable">listener</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addLocationListener</span>(<span class="hljs-params">listener?: (location: Coordinates | ReGeocode) =&gt; <span class="hljs-built_in">void</span></span>): <span class="hljs-title">void</span></span>;
+
+<span class="hljs-comment">/**
+ * 设置是否gps优先-wx
+ * 只有在单次定位高精度定位模式下有效
+ * 设置为true时，会等待卫星定位结果返回，最多等待30秒，若30秒后仍无卫星定位结果返回，返回网络定位结果
+ * <span class="hljs-doctag">@default <span class="hljs-variable">false</span></span>
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setGpsFirst</span>(<span class="hljs-params">isSetGpsFirst: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">void</span></span>;
+
+<span class="hljs-comment">/**
+ * 设置定位是否等待WIFI列表刷新-wx
+ * 定位精度会更高，但是定位速度会变慢1-3秒
+ * 从3.7.0版本开始，支持连续定位（连续定位时首次会等待刷新） 3.7.0之前的版本，仅适用于单次定位，当设置为true时，连续定位会自动变为单次定位,
+ * <span class="hljs-doctag">@default <span class="hljs-variable">false</span></span>
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setOnceLocationLatest</span>(<span class="hljs-params">isOnceLocationLatest: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">void</span></span>;
+
+<span class="hljs-comment">/**
+ * 设置是否使用缓存策略, 默认为true 使用缓存策略
+ * <span class="hljs-doctag">@default <span class="hljs-variable">true</span></span>
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setLocationCacheEnable</span>(<span class="hljs-params">isLocationCacheEnable: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">void</span></span>;
+
+<span class="hljs-comment">/**
+ * 设置网络请求超时时间。默认为30秒。在仅设备模式下无效
+ * <span class="hljs-doctag">@default </span>30000
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setHttpTimeOut</span>(<span class="hljs-params">httpTimeOut: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">void</span></span>;
+
+<span class="hljs-comment">/**
+ * 设置网络请求的协议。默认为HTTP协议。可选HTTP或者HTTPS
+ * <span class="hljs-doctag">@default <span class="hljs-variable">HTTP</span></span>
+ * <span class="hljs-doctag">@platform <span class="hljs-variable">android</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setLocationProtocol</span>(<span class="hljs-params">amapLocationProtocol: <span class="hljs-string">&#x27;HTTP&#x27;</span> | <span class="hljs-string">&#x27;HTTPS&#x27;</span></span>): <span class="hljs-title">void</span></span>;
 </code></pre>
 				<a href="#错误处理" id="错误处理" style="color: inherit; text-decoration: none;">
 					<h2>错误处理</h2>
