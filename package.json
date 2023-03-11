@@ -46,6 +46,6 @@
     "react": "18.2.0",
     "react-native": "0.71.4",
     "typedoc": "0.23.26",
-    "typescript": "3.9.7"
+    "typescript": "3.9.10"
   }
 }
