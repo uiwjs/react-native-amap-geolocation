@@ -66,6 +66,8 @@
 					<h2>@uiw/react-native-amap-geolocation</h2>
 				</a>
 				<p><a href="https://npmjs.org/package/@uiw/react-native-amap-geolocation"><img src="https://img.shields.io/npm/v/@uiw/react-native-amap-geolocation.svg" alt="NPM Version"></a>
+					<img src="https://shields.io/badge/SDK-6.2.0-green?logo=android&style=flat" alt="SDK-6.2.0">
+					<img src="https://shields.io/badge/AMapLocation-2.9.0-green?logo=apple&style=flat" alt="AMapLocation-2.9.0">
 				<img src="https://img.shields.io/david/peer/uiwjs/react-native-amap-geolocation" alt="David"></p>
 				<p>React Native 高德地图定位模块，支持 Android/iOS。提供尽可能完善的原生接口，同时提供符合 Web 标准的 Geolocation API 以及 <a href="https://uiwjs.github.io/react-native-amap-geolocation/">完整的接口文档</a>。</p>
 				<a href="#注意事项" id="注意事项" style="color: inherit; text-decoration: none;">
@@ -116,6 +118,27 @@
 						<li>在 <code>Background Modes</code> 中勾选 <code>Location updates</code></li>
 					</ol>
 				</details>
+				<details>
+					<summary>Android：获取 apikey 失败 errorCode : 10001</summary>
+					<pre><code class="language-bash">原因：***确保调用SDK任何接口前先调用更新隐私合规updatePrivacyShow、updatePrivacyAgree两个接口并且参数值都为<span class="hljs-literal">true</span>，若未正确设置有崩溃风险***
+使用loc SDK 功能使用前请确保已经正确设置apiKey，如有疑问请在高德开放平台官网中搜索【INVALID_USER_KEY】相关内容进行解决。
+</code></pre>
+					<p>解决方法：重新申请 <code>apikey</code></p>
+				</details>
+				<details>
+					<summary>Android：new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method</summary>
+					<pre><code class="language-bash">WARN  `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+WARN  `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+</code></pre>
+					<p>解决方法：重新申请 <code>apikey</code></p>
+				</details>
+				<details>
+					<summary>Android：请在高德开放平台官网中搜索"SERVICE_NOT_EXIST"相关内容进行解决</summary>
+					<pre><code class="language-bash">请在高德开放平台官网中搜索<span class="hljs-string">&quot;SERVICE_NOT_EXIST&quot;</span>相关内容进行解决
+</code></pre>
+					<p>解决方法：<a href="https://lbs.amap.com/cooperation/technical_advisory/?tab=4">重新申请 <code>apikey</code></a></p>
+					<p><img src="./imgs/SERVICE_NOT_EXIST.png" alt=""></p>
+				</details>
 				<a href="#安装依赖" id="安装依赖" style="color: inherit; text-decoration: none;">
 					<h2>安装依赖</h2>
 				</a>
@@ -126,8 +149,14 @@ $ <span class="hljs-built_in">cd</span> ios &amp;&amp; pod install
 				<a href="#基本用法" id="基本用法" style="color: inherit; text-decoration: none;">
 					<h2>基本用法</h2>
 				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { Platform } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-native&#x27;</span>;
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { PermissionsAndroid } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-native&quot;</span>;
+<span class="hljs-keyword">import</span> { Platform } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-native&#x27;</span>;
 <span class="hljs-keyword">import</span> AMapGeolocation <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@uiw/react-native-amap-geolocation&#x27;</span>;
+
+<span class="hljs-keyword">await</span> PermissionsAndroid.requestMultiple([
+  PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+  PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+]);
 
 <span class="hljs-keyword">let</span> apiKey = <span class="hljs-string">&#x27;&#x27;</span>;
 
@@ -185,8 +214,11 @@ AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>)
   <span class="hljs-built_in">this</span>.setState({
     <span class="hljs-attr">location</span>: <span class="hljs-built_in">JSON</span>.stringify(location, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>), 
   });
-  listener.remove();
 });
+<span class="hljs-comment">// 移除监听事件</span>
+listener.remove();
+<span class="hljs-comment">// 开启监听</span>
+AMapGeolocation.start();
 </code></pre>
 				<a href="#逆地理编码" id="逆地理编码" style="color: inherit; text-decoration: none;">
 					<h2>逆地理编码</h2>
@@ -532,7 +564,7 @@ AMapGeolocation.setDistanceFilter(<span class="hljs-number">10</span>);
 					<h2>其它</h2>
 				</a>
 				<p>当前工程基于 <a href="https://github.com/brodybits/create-react-native-module">@brodybits/create-react-native-module</a> 初始化。</p>
-				<pre><code class="language-bash">npx create-react-native-module --package-identifier com.uiwjs.react.geolocation --object-class-name RNAMapGeolocation --generate-example AMapGeolocation --example-react-native-version 0.63.0 --module-name @uiw/react-native-amap-geolocation --github-account uiwjs --author-name <span class="hljs-string">&quot;Kenny Wong&quot;</span> --author-email <span class="hljs-string">&quot;wowohoo@qq.com&quot;</span>
+				<pre><code class="language-bash">npx create-react-native-module --package-identifier com.uiwjs.example.geolocation --object-class-name RNAMapGeolocation --generate-example AMapGeolocation --example-react-native-version 0.63.0 --module-name @uiw/react-native-amap-geolocation --github-account uiwjs --author-name <span class="hljs-string">&quot;Kenny Wong&quot;</span> --author-email <span class="hljs-string">&quot;wowohoo@qq.com&quot;</span>
 </code></pre>
 				<a href="#开发" id="开发" style="color: inherit; text-decoration: none;">
 					<h2>开发</h2>
