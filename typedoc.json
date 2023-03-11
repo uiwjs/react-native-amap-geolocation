@@ -1,4 +1,5 @@
 {
+  "$schema": "https://typedoc.org/schema.json",
   "inputFiles": "./index.d.ts",
   "out": "typedoc",
   "name": "React Native Amap Geolocation",
