@@ -36,25 +36,61 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setApiKey(String key) {
+    public void setApiKey(String key) throws Exception {
         if (client != null) {
-            client = null;
+            // client = null;
+            client.onDestroy();
         }
         // 通过SDK提供的 `setApiKey(String key);` 接口设置Key，注意Key设置要在SDK业务初始化之前。
         // 需要在初始化的额前面设置 key
         AMapLocationClient.setApiKey(key);
+        /**
+         * 设置包含隐私政策，并展示用户授权弹窗 `必须在 AmapLocationClient 实例化之前调用`
+         * @param context
+         * @param isContains: 是隐私权政策是否包含高德开平隐私权政策  true 是包含
+         * @param isShow: 隐私权政策是否弹窗展示告知用户 true 是展示
+         * @since 5.6.0
+         */
+        AMapLocationClient.updatePrivacyShow(this.reactContext, true, true);
+        /**
+         * 设置是否同意用户授权政策 `必须在 AmapLocationClient 实例化之前调用
+         * https://lbs.amap.com/api/android-location-sdk/guide/create-project/dev-attention#t1
+         * @param context
+         * @param isAgree:隐私权政策是否取得用户同意 true 是用户同意
+         *
+         * @since 5.6.0
+         */
+        AMapLocationClient.updatePrivacyAgree(this.reactContext, true);
         // 初始化定位
-        client = new AMapLocationClient(reactContext.getApplicationContext());
+        client = new AMapLocationClient(this.reactContext.getApplicationContext());
         //设置定位参数
         client.setLocationOption(option);
         // 设置定位监听
         client.setLocationListener(locationListener);
-        // client.startLocation();
+        // 用于在 React Native 中获取 DeviceEventManagerModule.RCTDeviceEventEmitter 类的 JS Module 对象，
+        // 以便在 JS 端发送和侦听基于设备事件的消息
+        eventEmitter = reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
     }
 
     @Override
     public String getName() {
         return "RNAMapGeolocation";
+    }
+    /**
+     * 定位监听
+     */
+    AMapLocationListener locationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation location) {
+            System.out.println("client.onLocationChanged()!~!!!!!!");
+            mLastAMapLocation = location;
+            getDeviceEventEmitter().emit("AMapGeolocation", toJSON(location));
+        }
+    };
+
+    @ReactMethod
+    public void removeListeners(Integer count) {
+        // client.stopLocation();
     }
 
     @ReactMethod
@@ -340,21 +376,11 @@ public class RNAMapGeolocationModule extends ReactContextBaseJavaModule {
         }
         return eventEmitter;
     };
-    /**
-     * 定位监听
-     */
-    AMapLocationListener locationListener = new AMapLocationListener() {
-        @Override
-        public void onLocationChanged(AMapLocation location) {
-            mLastAMapLocation = location;
-            getDeviceEventEmitter().emit("AMapGeolocation", toJSON(location));
-        }
-    };
     private WritableMap toJSON(AMapLocation location) {
-        WritableMap map = Arguments.createMap();
         if (location == null) {
             return null;
         }
+        WritableMap map = Arguments.createMap();
         map.putInt("errorCode", location.getErrorCode());
         map.putString("errorInfo", location.getErrorInfo());
         if (location.getErrorCode() == AMapLocation.LOCATION_SUCCESS) {
