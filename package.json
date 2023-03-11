@@ -6,7 +6,6 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "files": [
-    "android/libs",
     "android/src",
     "android/build.gradle",
     "ios/RNAMapGeolocation.xcodeproj/project.pbxproj",
@@ -44,9 +43,9 @@
     "react-native": ">=0.60.0-rc.0 <1.0.x"
   },
   "devDependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.0",
-    "typedoc": "0.18.0",
-    "typescript": "3.9.7"
+    "react": "18.2.0",
+    "react-native": "0.71.4",
+    "typedoc": "0.23.26",
+    "typescript": "4.8.4"
   }
 }

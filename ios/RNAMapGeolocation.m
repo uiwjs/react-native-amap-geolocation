@@ -20,6 +20,9 @@ RCT_EXPORT_MODULE()
 - (instancetype)init {
     self = [super init];
     if (self) {
+        // https://lbs.amap.com/api/ios-location-sdk/guide/create-project/ios-location-privacy
+        [AMapLocationManager updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
+        [AMapLocationManager updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
         _manager = [[AMapLocationManager alloc] init];
         _manager.delegate = self;
         // https://lbs.amap.com/api/ios-location-sdk/guide/get-location/singlelocation
@@ -196,6 +199,7 @@ RCT_EXPORT_METHOD(coordinateConvert:
 RCT_EXPORT_METHOD(getCurrentLocation: (RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     [_clManager requestWhenInUseAuthorization];
+    NSLog(@"reGeocode:逆地理信息");
     // - kCLAuthorizationStatusAuthorizedWhenInUse 用户已授权仅在使用您的应用程序时使用其位置。
     // - kCLAuthorizationStatusAuthorizedAlways 用户已授权在任何时间使用其位置。
     // - kCLAuthorizationStatusNotDetermined 用户尚未对此应用做出选择

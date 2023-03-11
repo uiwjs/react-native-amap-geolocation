@@ -2,6 +2,8 @@
 ----
 
 [![NPM Version](https://img.shields.io/npm/v/@uiw/react-native-amap-geolocation.svg)](https://npmjs.org/package/@uiw/react-native-amap-geolocation)
+![SDK-6.2.0](https://shields.io/badge/SDK-6.2.0-green?logo=android&style=flat)
+![AMapLocation-2.9.0](https://shields.io/badge/AMapLocation-2.9.0-green?logo=apple&style=flat)
 ![David](https://img.shields.io/david/peer/uiwjs/react-native-amap-geolocation)
 
 React Native 高德地图定位模块，支持 Android/iOS。提供尽可能完善的原生接口，同时提供符合 Web 标准的 Geolocation API 以及 [完整的接口文档](https://uiwjs.github.io/react-native-amap-geolocation/)。
@@ -81,6 +83,44 @@ nehelper sent invalid result code [1] for Wi-Fi information request
 
 </details>
 
+<details>
+<summary>Android：获取 apikey 失败 errorCode : 10001</summary>
+
+```bash
+原因：***确保调用SDK任何接口前先调用更新隐私合规updatePrivacyShow、updatePrivacyAgree两个接口并且参数值都为true，若未正确设置有崩溃风险***
+使用loc SDK 功能使用前请确保已经正确设置apiKey，如有疑问请在高德开放平台官网中搜索【INVALID_USER_KEY】相关内容进行解决。
+```
+
+解决方法：重新申请 `apikey`
+
+</details>
+
+
+<details>
+<summary>Android：new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method</summary>
+
+```bash
+WARN  `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+WARN  `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+```
+
+解决方法：重新申请 `apikey`
+
+</details>
+
+<details>
+<summary>Android：请在高德开放平台官网中搜索"SERVICE_NOT_EXIST"相关内容进行解决</summary>
+
+```bash
+请在高德开放平台官网中搜索"SERVICE_NOT_EXIST"相关内容进行解决
+```
+
+解决方法：[重新申请 `apikey`](https://lbs.amap.com/cooperation/technical_advisory/?tab=4)
+
+![](./imgs/SERVICE_NOT_EXIST.png)
+
+</details>
+
 ## 安装依赖
 
 ```bash
@@ -92,8 +132,14 @@ $ cd ios && pod install
 ## 基本用法
 
 ```javascript
+import { PermissionsAndroid } from "react-native";
 import { Platform } from 'react-native';
 import AMapGeolocation from '@uiw/react-native-amap-geolocation';
+
+await PermissionsAndroid.requestMultiple([
+  PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+  PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+]);
 
 let apiKey = '';
 
@@ -152,8 +198,11 @@ const listener = AMapGeolocation.addLocationListener((location) => {
   this.setState({
     location: JSON.stringify(location, null, 2), 
   });
-  listener.remove();
 });
+// 移除监听事件
+listener.remove();
+// 开启监听
+AMapGeolocation.start();
 ```
 
 ## 逆地理编码
@@ -511,7 +560,7 @@ nehelper sent invalid result code [1] for Wi-Fi information request
 当前工程基于 [@brodybits/create-react-native-module](https://github.com/brodybits/create-react-native-module) 初始化。
 
 ```bash
-npx create-react-native-module --package-identifier com.uiwjs.react.geolocation --object-class-name RNAMapGeolocation --generate-example AMapGeolocation --example-react-native-version 0.63.0 --module-name @uiw/react-native-amap-geolocation --github-account uiwjs --author-name "Kenny Wong" --author-email "wowohoo@qq.com"
+npx create-react-native-module --package-identifier com.uiwjs.example.geolocation --object-class-name RNAMapGeolocation --generate-example AMapGeolocation --example-react-native-version 0.63.0 --module-name @uiw/react-native-amap-geolocation --github-account uiwjs --author-name "Kenny Wong" --author-email "wowohoo@qq.com"
 ```
 
 ## 开发

@@ -1,6 +1,8 @@
 import { NativeModules, NativeEventEmitter } from 'react-native';
 
-const eventEmitter = new NativeEventEmitter(NativeModules.RNAMapGeolocation);
+const { RNAMapGeolocation } = NativeModules;
+
+const eventEmitter = new NativeEventEmitter(RNAMapGeolocation);
 
 export default class AMapGeolocation {
   /**
@@ -267,7 +269,7 @@ export default class AMapGeolocation {
   static addLocationListener(listener) {
     return eventEmitter.addListener('AMapGeolocation', (info) => {
       let errorInfo = undefined;
-      if (info.errorCode || info.errorInfo) {
+      if (info && (info.errorCode || info.errorInfo)) {
         errorInfo = {
           code: info.errorCode,
           message: info.errorInfo
@@ -275,6 +277,12 @@ export default class AMapGeolocation {
       }
       listener && listener(info, errorInfo);
     });
+  }
+  /**
+   * 要删除其注册侦听器的事件的名称
+   */
+  static removeAllListeners() {
+    return eventEmitter.removeAllListeners('AMapGeolocation');
   }
   /**
    * 设置是否gps优先-wx
