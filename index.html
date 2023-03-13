@@ -178,7 +178,7 @@ AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>)
 <span class="hljs-comment">// 开始定位</span>
 AMapGeolocation.start();
 <span class="hljs-comment">// 停止更新位置信息</span>
-AMapGeolocation.start();
+AMapGeolocation.stop();
 <span class="hljs-comment">// 是否已经开始持续定位了</span>
 AMapGeolocation.isStarted();
 <span class="hljs-comment">// 在某些情况获取不到数据，建议使用 `addLocationListener` 来实现</span>
@@ -208,6 +208,9 @@ AMapGeolocation.isStarted();
 AMapGeolocation.setApiKey(apiKey);
 <span class="hljs-comment">// 定位是否返回逆地理信息</span>
 AMapGeolocation.setLocatingWithReGeocode(<span class="hljs-literal">true</span>);
+
+<span class="hljs-comment">// 必须，启动开始定位，addLocationListener 监听函数才有效</span>
+AMapGeolocation.start();
 <span class="hljs-comment">// 当设备可以正常联网时，还可以返回该定位点的对应的中国境内位置信息（包括：省、市、区/县以及详细地址）。</span>
 <span class="hljs-keyword">const</span> listener = AMapGeolocation.addLocationListener(<span class="hljs-function">(<span class="hljs-params">location</span>) =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;返回定位信息&#x27;</span>, location);
