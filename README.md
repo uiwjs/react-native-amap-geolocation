@@ -161,7 +161,7 @@ AMapGeolocation.setLocatingWithReGeocode(true);
 // 开始定位
 AMapGeolocation.start();
 // 停止更新位置信息
-AMapGeolocation.start();
+AMapGeolocation.stop();
 // 是否已经开始持续定位了
 AMapGeolocation.isStarted();
 // 在某些情况获取不到数据，建议使用 `addLocationListener` 来实现
@@ -192,6 +192,9 @@ if (Platform.OS === 'android') {
 AMapGeolocation.setApiKey(apiKey);
 // 定位是否返回逆地理信息
 AMapGeolocation.setLocatingWithReGeocode(true);
+
+// 必须，启动开始定位，addLocationListener 监听函数才有效
+AMapGeolocation.start();
 // 当设备可以正常联网时，还可以返回该定位点的对应的中国境内位置信息（包括：省、市、区/县以及详细地址）。
 const listener = AMapGeolocation.addLocationListener((location) => {
   console.log('返回定位信息', location);
