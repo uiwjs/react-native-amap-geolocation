@@ -8,10 +8,10 @@
   "files": [
     "android/src",
     "android/build.gradle",
+    "react-native-amap-geolocation.podspec",
     "ios/RNAMapGeolocation.xcodeproj/project.pbxproj",
     "ios/RNAMapGeolocation.h",
     "ios/RNAMapGeolocation.m",
-    "ios/RNAMapGeolocation.podspec",
     "ios/RNAMapGeolocation.xcworkspace/xcshareddata",
     "ios/RNAMapGeolocation.xcworkspace/contents.xcworkspacedata",
     "index.d.ts",
