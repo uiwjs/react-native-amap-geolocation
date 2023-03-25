@@ -21,9 +21,14 @@ RCT_EXPORT_METHOD(setApiKey:(NSString *)apiKey) {
     [AMapServices sharedServices].apiKey = apiKey;
     _manager = [[AMapLocationManager alloc] init];
     _manager.delegate = self;
+     // https://lbs.amap.com/api/ios-location-sdk/guide/get-location/singlelocation
+     // 由于苹果系统的首次定位结果为粗定位，其可能无法满足需要高精度定位的场景。
+     // 所以，高德提供了 kCLLocationAccuracyBest 参数，设置该参数可以获取到精度在 10m 左右的定位结果，但是相应的需要付出比较长的时间（10s左右），越高的精度需要持续定位时间越长。
+     // 推荐：kCLLocationAccuracyHundredMeters，一次还不错的定位，偏差在百米左右，超时时间设置在2s-3s左右即可。
     [AMapLocationManager updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
     [AMapLocationManager updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
     [_manager setDesiredAccuracy: kCLLocationAccuracyHundredMeters];
+    // 设置不允许系统暂停定位
     [_manager setPausesLocationUpdatesAutomatically: NO];
     [[AMapServices sharedServices] setEnableHTTPS:YES];
     _clManager = [CLLocationManager new];

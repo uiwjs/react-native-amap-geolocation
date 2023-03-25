@@ -7,6 +7,7 @@
 
 import React, {useEffect, useState} from 'react';
 import {
+  PermissionsAndroid,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -33,18 +34,21 @@ function App(): JSX.Element {
     isLocationCacheEnable: true,
   });
   useEffect(() => {
+    if (Platform.OS === 'android') {
+      getPermissionsAndroid();
+    }
     let apiKey = '';
     if (Platform.OS === 'ios') {
       apiKey = '00b74444d56a1f9e036b608a52f0da33';
     }
     if (Platform.OS === 'android') {
-      apiKey = '5084df66535c2663b89c60b11661b212';
+      apiKey = 'cadf96f2f8ca37f40b4f9703ac0c32d2';
     }
     if (apiKey) {
       try {
         AMapGeolocation.setApiKey(apiKey);
       } catch (error) {
-        console.log('error:', error);
+        console.log('error:----------->', error);
       }
     }
     // iOS 指定所需的精度级别
@@ -60,12 +64,15 @@ function App(): JSX.Element {
     });
     // 开启监听
     AMapGeolocation.start();
-    console.log(
-      'AMapGeolocation.addLocationListener',
-      AMapGeolocation.startUpdatingHeading,
-    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const getPermissionsAndroid = async () => {
+    await PermissionsAndroid.requestMultiple([
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+    ]);
+  };
 
   const getLocationState = async () => {
     const isStarted = await AMapGeolocation.isStarted();
@@ -90,9 +97,7 @@ function App(): JSX.Element {
   };
   const getCurrentLocation = async () => {
     try {
-      console.log('json:-getCurrentLocation-2->>> 获取当前定位信息');
       AMapGeolocation.start();
-      console.log('json:-getCurrentLocation-->>> 获取当前定位信息');
       const json = await AMapGeolocation.getCurrentLocation();
       console.log('json:-json-->>>', json);
     } catch (error) {

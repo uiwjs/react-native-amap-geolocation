@@ -121,6 +121,20 @@ WARN  `new NativeEventEmitter()` was called with a non-null argument without the
 
 </details>
 
+<details>
+<summary>Android：SDK调用高德业务失败返回INVALID_USER_KEY</summary>
+
+```bash
+当出现INVALID_USER_KEY （请注意不是INVALID_USER_SCODE）或错误码 7、1001、1002时。可按照如下操作
+```
+
+#### 配置AndroidManifest.xml文件
+是否在AndroidManifest.xml的application标签中正确配置Key：
+```
+<meta-data android:name="com.amap.api.v2.apikey" android:value="您的Key"> </meta-data>
+```
+</details>
+
 ## 安装依赖
 
 ```bash
